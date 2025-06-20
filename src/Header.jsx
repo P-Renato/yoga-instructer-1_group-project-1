@@ -19,6 +19,12 @@ export default function Header () {
             <h1>Carolina Rose</h1>
             <button>Contact</button>
         </header>
+        <nav className="headerText">
+            <p> 
+                "The nature of yoga is to shine the light of awareness into the darkest corners of the body." <br/> — Jason Crandell
+
+            </p>
+        </nav>
     </>
     )
 }

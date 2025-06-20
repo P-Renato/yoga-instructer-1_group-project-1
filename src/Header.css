@@ -44,3 +44,30 @@
     justify-content: space-around;
     padding-top: 10rem;
 }
+
+.headerText {
+    height: 16.5rem;
+    background-color: var(--colorTwo);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.headerText p {
+    font-family: var(--CrimsonPro);
+    color: var(--whiteColor);
+    position: relative;
+    padding-left: 2.5rem; 
+    font-size: 1.5em;
+}
+
+.headerText p::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: -1em;
+    width: 2px;           
+    height: 5em;        
+    background: var(--whiteColor); 
+    border-radius: 2px;
+}
