@@ -3,7 +3,7 @@ import "./AboutMe.css";
 
 export default function AboutMe() {
     return (
-        <nav className="about-me">
+        <nav className="about-me" id="aboutMe">
             
             <nav className="aboutMeText">
                 <h2>Carolina Rose</h2>

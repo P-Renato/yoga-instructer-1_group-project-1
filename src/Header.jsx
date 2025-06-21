@@ -9,8 +9,8 @@ export default function Header () {
     <>
         <header className="header">
             <nav className="navBar">
-                <a href="">About me</a>
-                <a href="">Schedule</a>
+                <a href="#aboutMe">About me</a>
+                <a href="#schedule">Schedule</a>
                 <a href="">Event</a>
                 <a href="">Blog</a>
             </nav>
