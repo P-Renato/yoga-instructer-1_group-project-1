@@ -3,14 +3,25 @@ import "./Header.css";
 
 
 export default function Header () {
+    const smoothScroll = (e, targetId) => {
+  e.preventDefault(); 
+  const target = document.querySelector(targetId);
+  if (target) {
+    target.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start', 
+    });
+  }
+};
     return (
+        
 
     
     <>
         <header className="header">
             <nav className="navBar">
-                <a href="#aboutMe">About me</a>
-                <a href="#schedule">Schedule</a>
+                <a href="#aboutMe" onClick={(e) => smoothScroll(e, '#aboutMe')}>About me</a>
+                <a href="#schedule"  onClick={(e) => smoothScroll(e, '#schedule')}>Schedule</a>
                 <a href="">Event</a>
                 <a href="">Blog</a>
             </nav>
