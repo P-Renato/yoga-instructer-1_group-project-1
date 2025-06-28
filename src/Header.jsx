@@ -4,15 +4,15 @@ import "./Header.css";
 
 export default function Header () {
     const smoothScroll = (e, targetId) => {
-  e.preventDefault(); 
-  const target = document.querySelector(targetId);
-  if (target) {
-    target.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start', 
-    });
-  }
-};
+        e.preventDefault(); 
+        const target = document.querySelector(targetId);
+        if (target) {
+            target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start', 
+            });
+        }
+    };
     return (
         
 
@@ -23,7 +23,7 @@ export default function Header () {
                 <a href="#aboutMe" onClick={(e) => smoothScroll(e, '#aboutMe')}>About me</a>
                 <a href="#schedule"  onClick={(e) => smoothScroll(e, '#schedule')}>Schedule</a>
                 <a href="">Event</a>
-                <a href="">Blog</a>
+                <a href="#blog" onClick={(e) => smoothScroll(e, '#blog')}>Blog</a>
             </nav>
             <h1>Carolina Rose</h1>
             <button>Contact</button>
