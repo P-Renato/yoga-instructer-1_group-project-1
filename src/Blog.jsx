@@ -23,7 +23,8 @@ export default function Blog () {
                         <a href="">Read more...</a>
                     </nav>
                 </nav>
-                <nav className="container2 container">
+                <section className="secondLayout">
+                    <nav className="container2 container">
                     <nav>
                          <img src="yogaphoto/23ebdcb8-22a5-4fa8-9390-dfa0917fcb68 2.png" alt="Blog-image" />
                     </nav>
@@ -31,17 +32,6 @@ export default function Blog () {
                     <nav className="innerTexts">
                         <p>17.01.2025</p>
                         <h3>Participated in a meditation seminar</h3>
-                        <a href="">Read more...</a>
-                    </nav>
-                </nav>
-                <nav className="container3 container">
-                    <nav>
-                        <img src="yogaphoto/e8bb2985-c52e-4375-996f-d155e0422493.png" alt="Blog-image" />
-                    </nav>
-                    
-                    <nav className="innerTexts">
-                         <p>17.01.2025</p>
-                        <h3>Adjusting your body to the length of the Day</h3>
                         <a href="">Read more...</a>
                     </nav>
                 </nav>
@@ -56,6 +46,20 @@ export default function Blog () {
                         <a href="">Read more...</a>
                     </nav>
                 </nav>
+                </section>
+                
+                <section className="thirdLayout">
+                    <nav className="container3 container">
+                    <nav>
+                        <img src="yogaphoto/e8bb2985-c52e-4375-996f-d155e0422493.png" alt="Blog-image" />
+                    </nav>
+                    
+                    <nav className="innerTexts">
+                         <p>17.01.2025</p>
+                        <h3>Adjusting your body to the length of the Day</h3>
+                        <a href="">Read more...</a>
+                    </nav>
+                </nav>
                 <nav className="container5 container">
                     <nav>
                         <img src="yogaphoto/d8ad3e34-d319-4bed-a0a1-1bff896a14e0.png" alt="Blog-image" />
@@ -67,6 +71,10 @@ export default function Blog () {
                         <a href="">Read more...</a>
                     </nav>
                 </nav>
+                </section>
+                
+                
+                
             </section>
         </>
     )
