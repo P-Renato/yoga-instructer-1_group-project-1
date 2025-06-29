@@ -20,7 +20,7 @@ export default function Blog () {
                         <span className="inline-flex"><p>30.01.2025</p><strong>New!</strong></span>
                         <h3>Create a good relationship with your chakras</h3>
                         <p>Create a harmonious relationship with your chakras to cultivate balance, self-awareness, and inner peace....</p>
-                        <a href="">Read more...</a>
+                        <NavLink>Read more...</NavLink>
                     </nav>
                 </nav>
                 <section className="secondLayout">
