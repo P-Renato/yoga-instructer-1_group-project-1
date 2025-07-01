@@ -1,7 +1,24 @@
+import { NavLink } from "react-router-dom";
 import "./App.css";
 import "./Blog.css";
+import { useEffect, useState } from "react";
 
 export default function Blog () {
+    const [blogInfo, setBlogInfo] = useState("");
+
+    useEffect(() => {
+        fetch('./database/data.json')
+            .then((res) => res.json())
+            .then((data) => {
+                setBlogInfo(data.blog)
+                console.log(blogInfo)
+            })
+                
+            
+    }, [])
+
+    if(!blogInfo.length) return <p>Loading ...</p>;
+
     return (
         <>
             <header className="blogHeader" id="blog">
@@ -11,19 +28,25 @@ export default function Blog () {
                 <h2>Blog</h2>
             </header>
             <section className="blogSection">
-                <nav className="container1 container">
-                    <nav className="img-box">
-                        <img src="yogaphoto/5ab014e1-82ef-43e8-a6df-a9d1e56da53b.png" alt="Blog-image" />
-                    </nav>
-                    
-                    <nav className="innerTexts1">
-                        <span className="inline-flex"><p>30.01.2025</p><strong>New!</strong></span>
-                        <h3>Create a good relationship with your chakras</h3>
-                        <p>Create a harmonious relationship with your chakras to cultivate balance, self-awareness, and inner peace....</p>
-                        <NavLink>Read more...</NavLink>
-                    </nav>
+                <nav>
+                    {blogInfo.map((x, i)=> (
+                        <div className={`container${i + 1} container`} key={x.id}>
+                            <nav className="img-box">
+                                <img src= {x.img} alt="Blog-image" />
+                            </nav>
+                            
+                            <nav className="innerTexts1">
+              
+                                <span className="inline-flex"><p>{x.createdDay}</p><strong>New!</strong></span>
+                                <h3>{x.title}</h3>
+                                <p>{x.content}</p>
+                                <NavLink>Read more...</NavLink>
+  
+                            </nav>
+                     </div>
+                     ))}
                 </nav>
-                <section className="secondLayout">
+                {/* <section className="secondLayout">
                     <nav className="container2 container">
                     <nav>
                          <img src="yogaphoto/23ebdcb8-22a5-4fa8-9390-dfa0917fcb68 2.png" alt="Blog-image" />
@@ -71,7 +94,7 @@ export default function Blog () {
                         <a href="">Read more...</a>
                     </nav>
                 </nav>
-                </section>
+                </section> */}
                 
                 
                 
