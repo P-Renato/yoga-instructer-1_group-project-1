@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import "../App.css";
-import "./styles/Blog.css";
+import "./Blog.css";
 import { useEffect, useState } from "react";
 
 export default function Blog () {
