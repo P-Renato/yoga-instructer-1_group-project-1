@@ -7,7 +7,7 @@ export default function Blog () {
     const [blogInfo, setBlogInfo] = useState("");
 
     useEffect(() => {
-        fetch('./database/data.json')
+        fetch('../database/data.json')
             .then((res) => res.json())
             .then((data) => {
                 setBlogInfo(data.blog)
@@ -60,7 +60,7 @@ export default function Blog () {
                     {group.map((x) => (
                         <nav
                         key={x.id}
-                        className={`container${x.id} container`} // or use `i` if needed
+                        className={`container${x.id} container`} 
                         >
                         <nav>
                             <img src={x.img} alt="Blog-image" />
