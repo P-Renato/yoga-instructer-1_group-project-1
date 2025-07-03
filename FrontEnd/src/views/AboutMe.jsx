@@ -1,4 +1,4 @@
-import "./App.css";
+import "../App.css";
 import "./AboutMe.css";
 
 export default function AboutMe() {

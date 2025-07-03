@@ -1,4 +1,4 @@
-import "./App.css";
+import "../App.css";
 import "./Schedule.css";
 
 export default function Schedule () {
