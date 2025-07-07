@@ -1,11 +1,13 @@
 import React from 'react'
 import SideBar from './SideBar'
-import Information from './Information'
+import { Outlet } from 'react-router-dom'
 export default function Adminpage() {
     return (
         <div className='adminpage'>
             <SideBar />
-            <Information />
+            <div className='information'>
+            <Outlet />
+            </div>
         </div>
     )
 }

@@ -1,7 +1,14 @@
 import React from 'react'
+import Footer from '../components/Homepage/Footer'
 
 export default function Contact() {
   return (
-    <div>Contact</div>
+    <>
+      <h1>Contact</h1>
+      <form id='contact'>
+
+      </form>
+      <Footer />
+    </>
   )
 }

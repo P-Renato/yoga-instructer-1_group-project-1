@@ -4,6 +4,7 @@ import AboutMe from '../../views/AboutMe';
 import Schedule from '../../views/Schedule';
 import Blog from '../../views/Blog';
 import Contact from '../../views/Contact';
+import Event from "../../views/Event"
 
 export default function Mainpage() {
     return (
@@ -12,6 +13,7 @@ export default function Mainpage() {
             <AboutMe />
             <Schedule />
             <Blog />
+            <Event />
             <Contact />
         </>
     )

@@ -1,3 +1,4 @@
+
 .login-page {
     border: 1px solid #ccc;
     padding: 2em;
@@ -41,14 +42,41 @@
     flex-direction: row;
     justify-content: space-between;
     padding: 2em;
+    background-color: var(--whiteColor);
 }
 
 .sidebar {
     width: 20%;
-    background-color: #f4f4f4;
+    background-color: white;
     padding: 1em;
     border-radius: 5px;
+    border: 2px solid #ddd;
+    display: flex ;
+    flex-direction: column;
+    align-items: center;
+    font-size: large;
+    gap: 1em;
+    
+    
+    
+    li{
+        list-style: none;
+        padding: 1em;
+    }
+    
 }
+
+
+.active-link {
+  color: red;
+  font-weight: bold;
+}
+
+.inactive-link {
+  color: black;
+  text-decoration: none;
+}
+
 
 .information {
     width: 75%;
@@ -58,3 +86,111 @@
     border: 2px solid #ddd;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+/* Blog */
+.info-container {
+    border: 1px solid black;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2em;
+    padding: 1em;
+    margin: 1em auto;
+
+    img {
+        width: 200px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+}
+
+.edit-btn {
+    padding: 0.5em 1em;
+    background-color: var(--colorTwo);
+    border: none;
+    border-radius: 15px;
+    width: 8em;
+    cursor: pointer;
+    margin: 1em;
+    color: whitesmoke;
+}
+
+.delete-btn {
+    padding: 0.5em 1em;
+    background-color: var(--colorFive);
+    border: none;
+    width: 8em;
+    border-radius: 15px;
+    cursor: pointer;
+    margin: 1em;
+    color: whitesmoke;
+}
+
+.arrow {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    display: block;
+    left: 50%;
+    cursor: pointer;
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 1em;
+    border-radius: 5px;
+
+    input {
+        padding: 0.5em;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+    }
+}
+
+.edit-form-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;  
+    margin-top: 1em;
+}
+
+.post-btn, .back-btn {
+    padding: 0.5em 1em;
+    background-color: var(--colorTwo);
+    border: none;
+    border-radius: 15px;
+    width: 12em;
+    cursor: pointer;
+    color: whitesmoke;
+    margin: 1em;
+    position: relative;
+    left: 50%;
+    transform: translateX(-100%);
+}
+
+.back-btn {
+    background-color: var(--colorFive);
+}
+
+.add-btn {
+    padding: 0.5em 1em;
+    background-color: rgb(72, 72, 224);
+    border: none;
+    border-radius: 10px;
+    width: 12em;
+    cursor: pointer;
+    color: whitesmoke;
+    margin: 1em auto;
+    margin-right: 0;
+    display: block;
+    position: relative;
+    
+}
+/* Event */
+
+/* Edit Admin information */

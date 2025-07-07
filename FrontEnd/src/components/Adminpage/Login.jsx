@@ -7,8 +7,8 @@ export default function Login({ setLoggedIn }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoggedIn(true);      // Set loggedIn to true
-    navigate('/admin');     // Redirect to /admin
+    setLoggedIn(true);      
+    navigate('/admin');    
   };
 
   return (
