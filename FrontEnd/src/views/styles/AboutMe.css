@@ -1,5 +1,5 @@
 .about-me{
-    background-image: url('../assets/images/aboutme.png');
+    background-image: url('src/public/images/aboutme.png');
     background-repeat: no-repeat;
     background-size: cover; 
     background-position: center 50%;

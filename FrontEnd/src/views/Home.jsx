@@ -1,6 +1,6 @@
 import "../App.css";
-import "./Home.css";
-import Header from "../components/Homepage/Header";
+import "./styles/Home.css";
+import Header from '../components/Homepage/Header'
 
 export function smoothScroll (e, targetId)  {
     e.preventDefault();

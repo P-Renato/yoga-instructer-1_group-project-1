@@ -1,26 +1,16 @@
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { blogContext } from "./BlogContext";
 import "../App.css";
-import "./Blog.css";
-import { useEffect, useState } from "react";
+import "./styles/Blog.css";
 
 export default function Blog () {
-    const [blogInfo, setBlogInfo] = useState("");
-
-    useEffect(() => {
-        fetch('../database/data.json')
-            .then((res) => res.json())
-            .then((data) => {
-                setBlogInfo(data.blog)
-                console.log(blogInfo)
-            })
-                
-            
-    }, [])
-
-    if(!blogInfo.length) return <p>Loading ...</p>;
-
-    const firstPost = blogInfo[0];
-    const remainingPosts = blogInfo.slice(1);
+    const {blogs} = useContext(blogContext);
+    console.log(blogs)
+    
+    if (!blogs.length) return <p>Loading blog posts...</p>;
+    const firstPost = blogs[0];
+    const remainingPosts = blogs.slice(1);
 
     const groupedPosts = [];
     for (let i = 0; i < remainingPosts.length; i += 2) {
@@ -48,7 +38,7 @@ export default function Blog () {
                         </span>
                         <h3>{firstPost.title}</h3>
                         <p>{firstPost.content}</p>
-                        <NavLink>Read more...</NavLink>
+                        <NavLink to={`/blog-content/${firstPost.id}`}  key={firstPost.id}>Read more...</NavLink>
                     </nav>
                     </div>
                 </section>
@@ -68,7 +58,7 @@ export default function Blog () {
                         <nav className="innerTexts">
                             <p>{x.createdDay}</p>
                             <h3>{x.title}</h3>
-                            <NavLink>Read more...</NavLink>
+                            <NavLink to={`/blog-content/${x.id}`} key={x.id}>Read more...</NavLink>
                         </nav>
                         </nav>
                     ))}
