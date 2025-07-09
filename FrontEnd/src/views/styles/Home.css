@@ -1,6 +1,6 @@
 
 .header {
-  background-image: url('../assets/images/home.png');
+  background-image: url('/src/public/images/home.png');
   background-repeat: no-repeat;
   background-size: cover; 
   background-position: center 70%;

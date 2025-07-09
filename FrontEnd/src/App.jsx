@@ -11,6 +11,7 @@ import BlogList from "./views/AdminPage/BlogList";
 import EditBlog from "./views/AdminPage/EditBlog";
 import EditEvent from "./views/AdminPage/EditEvent";
 
+import  BlogContent  from "./views/BlogContent.jsx"
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -18,6 +19,7 @@ function App() {
   return (
     <Routes>
       <Route path='/' element={<Mainpage />} />
+      <Route path='blog-content/:id' element={<BlogContent/>} />
       <Route>
         <Route path='admin' element={loggedIn ? <Adminpage /> : <Login setLoggedIn={setLoggedIn} />}>
           <Route path='editAdmin' element={<EditAdmin />} />
