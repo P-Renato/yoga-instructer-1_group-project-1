@@ -8,7 +8,7 @@ export default function Contact() {
       <form id='contact'>
 
       </form>
-      <Footer />
+      
     </>
   )
 }

@@ -5,7 +5,7 @@ import Schedule from '../../views/Schedule';
 import Blog from '../../views/Blog';
 import Contact from '../../views/Contact';
 import Event from "../../views/Event"
-import Footer from "../../views/Footer";
+import Footer from "./Footer";
 
 export default function Mainpage() {
     return (

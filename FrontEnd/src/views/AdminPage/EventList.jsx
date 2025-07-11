@@ -31,7 +31,7 @@ export default function EventList() {
       <NavLink to={`/admin/editEvent`}><button className='add-btn'>Add new event</button></NavLink>
       {events.map((event) => (
         <div className='info-container' key={event.id}>
-          <img src={`../${event.img}`} alt="event-image" />          
+          <img src={`/${event.img}`} alt="event-image" />          
           <div className='info-title'>
             <b>{event.title}</b><br />
             <NavLink to={`/admin/editEvent/${event.id}`}><button className='edit-btn'>Edit</button></NavLink>
@@ -39,7 +39,7 @@ export default function EventList() {
           </div>
         </div>
       ))}
-      <img className='arrow' src="/src/assets/images/down-arrow.svg" alt="arrow" onClick={loadMoreHandler} />
+      <img className='arrow' src="/src/public/images/down-arrow.svg" alt="arrow" onClick={loadMoreHandler} />
     </div>
   )
 }

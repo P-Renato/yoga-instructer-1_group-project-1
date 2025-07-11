@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { blogContext } from "./BlogContext";
 import "../App.css";
 import "./styles/BlogContent.css"
-import Footer from "./Footer";
+import Footer from "../components/Homepage/Footer";
 
 
 function BlogContent() {

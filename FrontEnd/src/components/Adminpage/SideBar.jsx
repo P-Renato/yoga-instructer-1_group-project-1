@@ -5,7 +5,7 @@ export default function SideBar() {
   return (
     <div className='sidebar'>
       <img
-        src="../src/assets/images/profile.png"
+        src="../src/public/images/profile.png"
         alt="profile"
         style={{
           width: "100px",

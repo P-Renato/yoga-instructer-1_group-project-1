@@ -4,102 +4,79 @@ import { useParams, useNavigate } from 'react-router-dom';
 export default function EditBlog() {
   const { blogId } = useParams();
   const [blog, setBlog] = useState(null);
-  const [allBlogs, setAllBlogs] = useState([]);
   const navigate = useNavigate();
 
-  // Handle form submit
-  const submitHandler = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const newId = blogId ? Number(blogId) : allBlogs.length + 1;
+  useEffect(() => {
+    fetch(`http://localhost:5001/api/blogs/${blogId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.id === Number(blogId)) {
+          setBlog(data);
+        } else {
+          console.error('Blog not found');
+        }
+      })
 
-    const updatedBlog = {
-      id: newId,
-      title: formData.get('title'),
-      img: formData.get('file')?.name || blog.img || '',
-      content: formData.get('content'),
-      category: formData.get('category'),
-      createdDay: formData.get('date') || blog.createdDay,
-    };
-    
-    console.log('Submitted Blog:', updatedBlog);
+      .catch((err) => console.error('Fetch error:', err));
+  }, [blogId]);
 
-   
-
-    navigate('/admin/blogList');
-  };
-
-  const changeHandler = (e) => {
-    const { name, value } = e.target;
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
     setBlog((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: name === 'file' && files.length ? files[0].name : value,
     }));
   };
 
-  useEffect(() => {
-    fetch('/database/data.json')
-      .then((res) => res.json())
-      .then((data) => {
-        setAllBlogs(data.blog || []);
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-        if (blogId) {
-          const existingBlog = data.blog.find((b) => b.id === Number(blogId));
-          if (existingBlog) {
-            setBlog(existingBlog);
-          } else {
-            console.error('Blog not found');
-          }
+    fetch(`http://localhost:5001/api/blogs/${blogId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(blog),
+    })
+      .then((res) => {
+        if (res.ok) {
+          navigate('/admin/blogList');
         } else {
-          setBlog({
-            title: '',
-            img: '',
-            content: '',
-            category: '',
-            createdDay: new Date().toISOString().split('T')[0],
-          });
+          console.error('Failed to update blog');
         }
       })
       .catch((err) => console.error('Fetch error:', err));
-  }, [blogId]);
+  };
 
   if (!blog) return <div>Loading...</div>;
 
   return (
-    <div>
-      <form className="edit-form" onSubmit={submitHandler}>
-        <label htmlFor="title">Title</label>
-        <input type="text" name="title" value={blog.title} onChange={changeHandler} />
+    <form className="edit-form" onSubmit={handleSubmit}>
+      <label>Title</label>
+      <input type="text" name="title" value={blog.title} onChange={handleChange} />
 
-        <label htmlFor="file">Cover photo</label>
-        <input type="file" name="file" id="file" />
+      <label>Cover photo</label>
+      <input type="file" name="file" onChange={handleChange} />
 
-        <label htmlFor="content">Content</label>
-        <textarea
-          name="content"
-          value={blog.content}
-          rows={15}
-          cols={40}
-          onChange={changeHandler}
-          
-        />
+      <label>Content</label>
+      <textarea
+        name="content"
+        value={blog.content}
+        rows={15}
+        cols={40}
+        onChange={handleChange}
+      />
 
-        <div className="edit-form-bottom">
-          <div>
-            <label htmlFor="category">Category</label>
-            <input type="text" name="category" value={blog.category} onChange={changeHandler} />
-          </div>
-          <div>
-            <label htmlFor="date">Publish date</label>
-            <input type="date" name="date" value={blog.createdDay} onChange={changeHandler} />
-          </div>
-        </div>
+      <div className="edit-form-bottom">
+        <label>Category</label>
+        <input type="text" name="category" value={blog.category} onChange={handleChange} />
 
-        <div>
-          <button type="button" className="back-btn" onClick={() => navigate(-1)}>Back</button>
-          <button type="submit" className="post-btn">Post</button>
-        </div>
-      </form>
-    </div>
+        <label>Publish date</label>
+        <input type="date" name="createdDay" value={blog.createdDay} onChange={handleChange} />
+      </div>
+
+      <div>
+        <button type="button" className="back-btn" onClick={() => navigate(-1)}>Back</button>
+        <button type="submit" className="post-btn">Submit</button>
+      </div>
+    </form>
   );
 }
