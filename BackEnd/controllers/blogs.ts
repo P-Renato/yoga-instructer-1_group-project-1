@@ -1,0 +1,89 @@
+import { Request, Response, NextFunction } from "express";
+import { ReadDb, WriteDb } from "./ReadWriteFunction";
+
+export const getListOfBlogs = (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const blogsData = JSON.parse(ReadDb());
+        res.json(blogsData.blog); 
+    } catch (err) {
+        next(err);
+    }
+};
+
+export const getOneBlog = (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const blogsData = JSON.parse(ReadDb());
+        const id = parseInt(req.params.blogId);
+        const oneBlog = blogsData.blog.find((o) => o.id === id)
+        res.json(oneBlog); 
+    } catch (err) {
+        next(err);
+    }
+}
+
+export const addNewBlog = (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const blogsData = JSON.parse(ReadDb());
+
+    if (!Array.isArray(blogsData.blog)) {
+      return res.status(500).json({ error: "Database format error. Expected 'blog' to be an array." });
+    }
+
+    const newId = blogsData.blog.length + 1;
+    const day = new Date().toLocaleDateString('de-DE');
+    const { title, content, category, img } = req.body;
+
+    const newBlog = {
+      id: newId,
+      title,
+      content,
+      createdDay: day,
+      category,
+      img
+    };
+
+    blogsData.blog.push(newBlog);
+    WriteDb(blogsData); 
+    res.status(201).json({ message: "Blog added successfully", blog: newBlog });
+
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const updateBlog = (req: Request, res: Response, next: NextFunction) => {
+  const blogsData = JSON.parse(ReadDb());
+  const { title, content, category, img } = req.body;
+  const id = parseInt(req.params.blogId);
+
+  // Check if blog exists
+  const existingBlog = blogsData.blog.find((b: any) => b.id === id);
+  if (!existingBlog) {
+    return res.status(404).json({ message: "Blog not found" });
+  }
+
+  const updatedBlog = {
+    id,
+    title,
+    content,
+    createdDay: existingBlog.createdDay || new Date().toLocaleDateString('de-DE'),
+    category,
+    img,
+  };
+
+  blogsData.blog = blogsData.blog.map((b: any) =>
+    b.id === id ? updatedBlog : b
+  );
+
+  WriteDb(blogsData);
+  res.status(200).json({ message: "Blog edited successfully" });
+};
+
+
+export const deleteBlog = (req: Request, res: Response, next: NextFunction) => {
+    const blogsData = JSON.parse(ReadDb());
+    const id = parseInt(req.params.blogId);
+    blogsData.blog = blogsData.blog.filter((b)=> b.id !== id)
+    WriteDb(blogsData)
+    res.status(201).json({message: "This post of blog is deleted successful"})
+}
