@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function AddBlog() {
-  const [blog, setBlog] = useState({
+export default function AddEvent() {
+  const [event, setEvent] = useState({
     title: '',
     img: null,
     content: '',
-    category: '',
+    location: '',
   });
 
   const navigate = useNavigate();
@@ -16,9 +16,9 @@ export default function AddBlog() {
     const { name, value, files } = e.target;
 
     if (name === 'img') {
-      setBlog((prev) => ({ ...prev, img: files[0] }));
+      setEvent((prev) => ({ ...prev, img: files[0] }));
     } else {
-      setBlog((prev) => ({ ...prev, [name]: value }));
+      setEvent((prev) => ({ ...prev, [name]: value }));
     }
   };
 
@@ -27,14 +27,14 @@ export default function AddBlog() {
   e.preventDefault();
 
   const formData = new FormData();
-  formData.append("title", blog.title);
-  formData.append("content", blog.content);
-  formData.append("category", blog.category);
-  if (blog.img) {
-    formData.append("img", blog.img); 
+  formData.append("title", event.title);
+  formData.append("content", event.content);
+  formData.append("location", event.location);
+  if (event.img) {
+    formData.append("img", event.img); 
   }
 
-  fetch("http://localhost:5001/api/blogs/add", {
+  fetch("http://localhost:5001/api/events/add", {
     method: "POST",
     body: formData,
   })
@@ -45,8 +45,8 @@ export default function AddBlog() {
         // Show error from backend (like file type error)
         alert(`Error: ${data.error || 'Something went wrong'}`);
       } else {
-        alert("Blog uploaded successfully!");
-        navigate("/admin/blogList");
+        alert("Event uploaded successfully!");
+        navigate("/admin/eventList");
       }
     })
     .catch((err) => {
@@ -59,7 +59,7 @@ export default function AddBlog() {
   return (
     <form className="edit-form" onSubmit={handleSubmit}>
       <label>Title</label>
-      <input type="text" name="title" value={blog.title} onChange={handleChange} required />
+      <input type="text" name="title" value={event.title} onChange={handleChange} required />
 
       <label>Cover Photo</label>
       <input type="file" name="img" onChange={handleChange} accept="image/*" />
@@ -69,13 +69,13 @@ export default function AddBlog() {
         name="content"
         rows={15}
         cols={40}
-        value={blog.content}
+        value={event.content}
         onChange={handleChange}
         required
       />
 
-      <label>Category</label>
-      <input type="text" name="category" value={blog.category} onChange={handleChange} required />
+      <label>Location</label>
+      <input type="text" name="location" value={event.location} onChange={handleChange} required />
 
       <div className="form-actions">
         <button type="button" className="back-btn" onClick={() => navigate(-1)}>Back</button>

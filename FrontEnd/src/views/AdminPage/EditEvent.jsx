@@ -3,94 +3,108 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 export default function EditEvent() {
   const { eventId } = useParams();
-  const [event, setEvent] = useState(null);
-  const [allEvents, setAllEvents] = useState([]);
+  const [event, setEvent] = useState({
+    title: '',
+    img: null,
+    content: '',
+    location: '',
+  });
+
   const navigate = useNavigate();
 
-  // Handle form submit
-  const submitHandler = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const newId = eventId ? Number(eventId) : allEvents.length + 1;
-
-    const updatedEvent = {
-      id: newId,
-      title: formData.get('title'),
-      img: formData.get('file')?.name || event.img,
-      content: formData.get('content'),
-      category: formData.get('category'),
-      createdDay: formData.get('date') || event.createdDay,
-    };
-
-    console.log('Submitted Event:', updatedEvent);
-    // work with backend to save the event
-
-    navigate('/admin/eventList'); 
-  };
-
-  const changeHandler = (e) => {
-    const { name, value } = e.target;
-    setEvent((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
   useEffect(() => {
-    fetch('/database/data.json')
+    fetch(`http://localhost:5001/api/events/${eventId}`)
       .then((res) => res.json())
       .then((data) => {
-        setAllEvents(data.events); // get all data to create new id for new event
-
-        if (eventId) {
-          const existingEvent = data.events.find((ev) => ev.id === Number(eventId)); // update old data
-          if (existingEvent) {
-            setEvent(existingEvent);
-          } else {
-            console.error('Event not found');
-          }
+        if (data && data.id === Number(eventId)) {
+          setEvent(data);
         } else {
-          setEvent({
-            title: '',
-            img: '',
-            content: '',
-            category: '',
-            createdDay: new Date().toISOString().split('T')[0], // today
-          });
+          console.error('Blog not found');
         }
-      });
+      })
+      .catch((err) => console.error('Fetch error:', err));
   }, [eventId]);
+
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+
+    if (name === 'img') {
+      setEvent((prev) => ({ ...prev, img: files[0] }));
+    } else {
+      setEvent((prev) => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('title', event.title);
+    formData.append('content', event.content);
+    formData.append('category', event.category);
+    if (event.img) {
+      formData.append('img', event.img);
+    }
+
+    fetch(`http://localhost:5001/api/events/${eventId}`, {
+      method: 'PATCH',
+      body: formData,
+    })
+      .then(async (res) => {
+        const data = await res.json();
+
+        if (!res.ok) {
+          alert(`Error: ${data.error || 'Something went wrong'}`);
+        } else {
+          alert("Event uploaded successfully!");
+          navigate("/admin/eventList");
+        }
+      })
+      .catch((err) => {
+        console.error("Network error:", err);
+        alert("Network error");
+      });
+  };
 
   if (!event) return <div>Loading...</div>;
 
   return (
-    <div>
-      <form className='edit-form' onSubmit={submitHandler}>
-        <label htmlFor="title">Title</label>
-        <input type="text" name="title" value={event.title} onChange={changeHandler} />
+    <form className="edit-form" onSubmit={handleSubmit}>
+      <label>Title</label>
+      <input type="text" name="title" value={event.title} onChange={handleChange} required />
 
-        <label htmlFor="file">Cover photo</label>
-        <input type="file" name="file" id="file" />
+      <label>Cover photo</label>
+      <input type="file" name="img" onChange={handleChange} />
+      {event.img && (
+        <img
+          src={`http://localhost:5001/uploads/${event.img}`}
+          alt="Current"
+          style={{ maxWidth: '150px', marginTop: '10px' }}
+        />
+      )}
 
-        <label htmlFor="content">Content</label>
-        <textarea name="content" value={event.content} rows={15} cols={40} onChange={changeHandler} />
+      <label>Content</label>
+      <textarea
+        name="content"
+        value={event.content}
+        rows={15}
+        cols={40}
+        onChange={handleChange}
+        required
+      />
 
-        <div className="edit-form-bottom">
-          <div>
-            <label htmlFor="category">Category</label>
-            <input type="text" name="category" value={event.category} onChange={changeHandler} />
-          </div>
-          <div>
-            <label htmlFor="publish">Publish date</label>
-            <input type="date" name="date" value={event.createdDay} onChange={changeHandler} />
-          </div>
-        </div>
+      <div className="edit-form-bottom">
+        <label>Location</label>
+        <input type="text" name="location" value={event.location} onChange={handleChange} required />
 
-        <div>
-          <button type="button" className="back-btn" onClick={() => navigate(-1)}>Back</button>
-          <button type="submit" className="post-btn">Post</button>
-        </div>
-      </form>
-    </div>
+        <label>Publish date</label>
+        <input type="date" name="createdDay" value={event.createdDay} onChange={handleChange} />
+      </div>
+
+      <div>
+        <button type="button" className="back-btn" onClick={() => navigate(-1)}>Back</button>
+        <button type="submit" className="post-btn">Submit</button>
+      </div>
+    </form>
   );
 }

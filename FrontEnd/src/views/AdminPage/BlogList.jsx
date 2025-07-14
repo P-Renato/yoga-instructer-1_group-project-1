@@ -48,7 +48,7 @@ export default function BlogList() {
       <NavLink to={`/admin/addBlog`}><button className='add-btn'>Add new blog</button></NavLink>
       {blogs.map((blog) => (
         <div className='info-container' key={blog.id}>
-          <img src={`${blog.img}`} alt='blog-image' />
+          <img src={`http://localhost:5001/uploads/${blog.img}`} alt='blog-image' />
           <div className='info-title'>
             <b>{blog.title}</b>
             <br />
