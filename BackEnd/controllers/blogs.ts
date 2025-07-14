@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { ReadDb, WriteDb } from "./ReadWriteFunction";
 
+
 export const getListOfBlogs = (req: Request, res: Response, next: NextFunction) => {
     try {
         const blogsData = JSON.parse(ReadDb());
@@ -31,7 +32,8 @@ export const addNewBlog = (req: Request, res: Response, next: NextFunction) => {
 
     const newId = blogsData.blog.length + 1;
     const day = new Date().toLocaleDateString('de-DE');
-    const { title, content, category, img } = req.body;
+    const { title, content, category } = req.body;
+    const img = req.file ? "../uploads/"+req.file.filename : ""; // ✅ Get uploaded file name from multer
 
     const newBlog = {
       id: newId,
@@ -39,45 +41,53 @@ export const addNewBlog = (req: Request, res: Response, next: NextFunction) => {
       content,
       createdDay: day,
       category,
-      img
+      img,
     };
 
     blogsData.blog.push(newBlog);
-    WriteDb(blogsData); 
-    res.status(201).json({ message: "Blog added successfully", blog: newBlog });
+    WriteDb(blogsData);
 
+    res.status(201).json({ message: "Blog added successfully", blog: newBlog });
   } catch (err) {
     next(err);
   }
 };
 
+
 export const updateBlog = (req: Request, res: Response, next: NextFunction) => {
-  const blogsData = JSON.parse(ReadDb());
-  const { title, content, category, img } = req.body;
-  const id = parseInt(req.params.blogId);
+  try {
+    const blogsData = JSON.parse(ReadDb());
+    const id = parseInt(req.params.blogId);
+    const { title, content, category, createdDay } = req.body;
 
-  // Check if blog exists
-  const existingBlog = blogsData.blog.find((b: any) => b.id === id);
-  if (!existingBlog) {
-    return res.status(404).json({ message: "Blog not found" });
+    const existingBlog = blogsData.blog.find((b: any) => b.id === id);
+    if (!existingBlog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
+    const img = req.file ? req.file.filename : existingBlog.img;
+
+    const updatedBlog = {
+      id,
+      title: title ?? existingBlog.title,
+      content: content ?? existingBlog.content,
+      category: category ?? existingBlog.category,
+      createdDay: createdDay ?? existingBlog.createdDay,
+      img,
+    };
+
+    blogsData.blog = blogsData.blog.map((b: any) =>
+      b.id === id ? updatedBlog : b
+    );
+
+    WriteDb(blogsData);
+    res.status(200).json({ message: "Blog edited successfully", blog: updatedBlog });
+
+  } catch (error) {
+    next(error);
   }
-
-  const updatedBlog = {
-    id,
-    title,
-    content,
-    createdDay: existingBlog.createdDay || new Date().toLocaleDateString('de-DE'),
-    category,
-    img,
-  };
-
-  blogsData.blog = blogsData.blog.map((b: any) =>
-    b.id === id ? updatedBlog : b
-  );
-
-  WriteDb(blogsData);
-  res.status(200).json({ message: "Blog edited successfully" });
 };
+
 
 
 export const deleteBlog = (req: Request, res: Response, next: NextFunction) => {
