@@ -1,0 +1,19 @@
+
+.footer{
+    background-color: black;
+    padding: 1.5rem 2rem;
+}
+
+.nav{
+    display:flex;
+    justify-content: center;
+}
+
+.nav-links {
+    list-style:none;
+    display:flex;
+    gap: 2rem;
+    color:aliceblue;
+font-family: serif;
+
+}
