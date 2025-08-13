@@ -29,7 +29,7 @@ export default function Blog () {
                 <section className="firstLayout">
                     <div className="container1 container" key={firstPost.id}>
                     <nav className="img-box">
-                        <img src={firstPost.img} alt="Blog-image" />
+                        <img src={`http://localhost:5001/uploads/${firstPost.img}`} alt="Blog-image" />
                     </nav>
                     <nav className="innerTexts1">
                         <span className="inline-flex">
@@ -53,7 +53,7 @@ export default function Blog () {
                         className={`container${x.id} container`} 
                         >
                         <nav>
-                            <img src={x.img} alt="Blog-image" />
+                            <img src={`http://localhost:5001/uploads/${x.img}`} alt="Blog-image" />
                         </nav>
                         <nav className="innerTexts">
                             <p>{x.createdDay}</p>
