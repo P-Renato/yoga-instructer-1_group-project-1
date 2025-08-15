@@ -37,20 +37,25 @@ export default function Schedule () {
                     <section className="rightSection">
                         <nav>
                             <h4>Mein Studio</h4>
-                            <h5>Peace Yoga Studio</h5>
-                            <a href="">Glogauer Straße 19 Kreuzberg 10999 Berlin</a>
-                            <h5>Yellow Yoga</h5>
-                            <a href="">Glogauer Straße 19 Kreuzberg 10999 Berlin</a>
-                            <h5>Peace Yoga Studio</h5>
-                            <a href="">Glogauer Straße 19 Kreuzberg 10999 Berlin</a>
+                            <section className="studio-address-section">
+                                <div>
+                                    <h5>Peace Yoga Studio</h5>
+                                    <a href="">Glogauer Straße 19 Kreuzberg 10999 Berlin</a>
+                                </div>
+                                <div>
+                                    <h5>Yellow Yoga</h5>
+                                    <a href="">Glogauer Straße 19 Kreuzberg 10999 Berlin</a>
+                                </div>
+                                <div>
+                                    <h5>Peace Yoga Studio</h5>
+                                    <a href="">Glogauer Straße 19 Kreuzberg 10999 Berlin</a>
+                                </div>
+                            </section>
                         </nav>  
-                        <br />   
-                        <br />   
-                        <br />   
-                        <hr />
-                        <nav>
+                        
+                        <nav className="addtional-info-section">
                             <h4>Additional Info</h4> <span>09-01.2025</span>
-                            <p>I will be on vacation from <strong>February 2nd to February 7th.</strong> During this time, a substitute instructor will be teaching lessons, so I will provide more details later.</p>
+                            <p>I will be on vacation from <strong>February 2nd to February 7th.</strong>During this time, a substitute instructor will be teaching lessons, so I will provide more details later.</p>
                         </nav>           
                     </section>
                   </nav>  

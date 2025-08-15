@@ -1,0 +1,63 @@
+
+.contact-section {
+    border-color: var(--whiteColor);
+    min-width: 100%;
+    min-height: 100%;
+}
+
+
+.contact-section h1 {
+    font-family: var(--Marcellus);
+    font-weight: normal;
+    text-align: center;
+    margin: 2em;
+    font-size: 3em;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+}
+
+form div label {
+    font-family: var(--CrimsonPro);
+}
+
+form div input {
+    width: 60%;
+    border: none;
+    border-bottom: 1px solid #aaa;
+    padding: 0.5rem 0;
+    background: transparent;
+    font-size: 1rem;
+    outline: none;
+}
+
+#message {
+    width: 173%;
+}
+
+
+.contact-form-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 5rem;
+}
+
+.contact-form-section > * {
+    padding: 3em;
+} 
+
+
+.contact-send-button {
+    background-color: var(--colorTwo);
+    font-family: var(--Prata);
+    color: var(--whiteColor);
+    width: 11em;
+    height: 3em;
+    border-radius: 15px;
+    border: none;
+    float: right;
+    margin-right: 27rem;
+    font-size: 1.5em;
+}

@@ -1,0 +1,49 @@
+
+
+.event-body {
+    background-color: var(--colorTwo);
+    padding: 2em 3em;
+}
+
+.event-section {
+    padding: 2em;
+    border: .5px solid white;
+}
+
+.event-section h1:first-child {
+    font-family: var(--Marcellus);
+    color: var(--colorSix);
+    text-align: center;
+    font-weight: normal;
+    font-size: 4em;
+    margin: .8em;
+}
+
+.event-posts{
+    display: flex;
+    flex-direction: row;
+}
+
+.event-posts nav img {
+    width: 38rem;
+    overflow: hidden;
+    object-fit: cover;
+    height: 32rem;
+    margin: 3em;
+}
+
+.event-text-section {
+    font-family: var(--CrimsonPro);
+    color: var(--whiteColor);
+    font-size: 1.6em;
+    
+}
+
+.event-text-section > * {
+    margin: 1em;
+    font-weight: normal;
+}
+
+.event-text-section p:first-child {
+    margin-top: 1.5em;
+}
