@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="header">
       <nav className="nav">
         <ul className="nav-links">
-          <li>About me</li>
+          <li>About me 2</li>
           <li>Schedule</li>
           <li>Event</li>
           <li>Blog</li>
