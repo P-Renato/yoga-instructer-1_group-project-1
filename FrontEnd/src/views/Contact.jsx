@@ -1,5 +1,4 @@
 import {useState} from "react";
-import Footer from "../components/Homepage/Footer";
 import './styles/Contact.css'
 
 
@@ -19,7 +18,7 @@ export default function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Submitted data:", formData);
-    // Add form handling logic here (e.g., send to API or email)
+    
   };
 
   return (
@@ -28,20 +27,20 @@ export default function Contact() {
       <form id="contact" onSubmit={handleSubmit}>
         <section className="contact-form-section">
           <div>
-            <label htmlFor="first-name">First Name</label>
-            <input type="text" id="first-name" name="first-name" value={formData.firstName} onChange={handleChange}  />
+            <label htmlFor="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" value={formData.firstName} onChange={handleChange}  />
           </div>
           <div>
-            <label htmlFor="last-name">Last Name</label>
-            <input type="text" id="last-name" name="last-name" value={formData.lastName} onChange={handleChange}  />
+            <label htmlFor="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleChange}  />
           </div>
           <div>
             <label htmlFor="email">Email</label>
             <input name="email" id="email" type="email" value={formData.email} onChange={handleChange} />
           </div>
           <div>
-            <label htmlFor="phone-number">Phone Number</label>
-            <input type="text" id="phone-number" name="phone-number"  value={formData.phone} onChange={handleChange}/>
+            <label htmlFor="phone">Phone Number</label>
+            <input type="text" id="phone" name="phone"  value={formData.phone} onChange={handleChange}/>
           </div>
           <div>
             <label htmlFor="message">Message</label>

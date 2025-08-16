@@ -9,14 +9,16 @@ import Footer from "./Footer";
 
 export default function Mainpage() {
     return (
-        <>
-            <Home />
-            <AboutMe />
-            <Schedule />
-            <Blog />
-            <Event />
-            <Contact />
+        <div className="mainpage">
+            <main>
+                <Home />
+                <AboutMe />
+                <Schedule />
+                <Blog />
+                <Event />
+                <Contact />
+            </main>
             <Footer />
-        </>
+        </div>
     )
 }

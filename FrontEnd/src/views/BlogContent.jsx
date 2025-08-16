@@ -21,7 +21,7 @@ function BlogContent() {
    if (!foundBlog) return <p>Loading blog post...</p>;
   console.log(foundBlog)
   return (
-    <div className="bg-color">
+    <div className="bg-color mainpage">
       <main className="blog-content" key={foundBlog.id}>
         <h2>{foundBlog.title}</h2>
         <p>{foundBlog.createdDay}</p>

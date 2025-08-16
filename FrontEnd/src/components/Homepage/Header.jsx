@@ -1,5 +1,7 @@
 import React from 'react'
 import {smoothScroll} from '../../views/Home'
+import '../../views/styles/Header.css'
+
 export default function Header() {
     return (
         <header className="header">
@@ -10,7 +12,7 @@ export default function Header() {
                 <a href="#blog" onClick={(e) => smoothScroll(e, '#blog')}>Blog</a>
             </nav>
             <h1>Carolina Rose</h1>
-            <a href="#contact" onClick={(e) => smoothScroll(e, "#contact")}><button>Contact</button></a>
+            <a href="#contact" onClick={(e) => smoothScroll(e, "#contact")}><button className='contact-button'>Contact</button></a>
         </header>
     )
 }

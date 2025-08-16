@@ -1,0 +1,8 @@
+.contact-button:hover {
+    text-decoration: underline;
+    background-color: #9c9b86;
+}
+
+.contact-button {
+    cursor: pointer;
+}

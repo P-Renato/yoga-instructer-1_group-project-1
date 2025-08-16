@@ -3,7 +3,7 @@
 .scheduleNav {
     height: 66rem;
     background-color: var(--whiteColor);
-    border: 32px solid var(--colorOne);
+    border: 42px solid var(--colorOne);
     padding: 3rem;
 }
 
@@ -79,6 +79,13 @@
     position: relative;
 }
 
+.rightSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
 .addtional-info-section {
     background-color: var(--infoAddColor);
     color: var(--whiteColor);
@@ -88,4 +95,12 @@
 
 .studio-address-section > * {
     margin: 1em;
+}
+
+.studio-address-section div {
+    font-size: 1.2em;
+}
+
+.studio-address-section div:last-child {
+    margin-bottom: 3em;
 }
