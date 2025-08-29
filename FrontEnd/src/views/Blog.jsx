@@ -52,7 +52,7 @@ export default function Blog () {
                         key={x.id}
                         className={`container${x.id} container`} 
                         >
-                        <nav>
+                        <nav >
                             <img src={`http://localhost:5001/uploads/${x.img}`} alt="Blog-image" />
                         </nav>
                         <nav className="innerTexts">

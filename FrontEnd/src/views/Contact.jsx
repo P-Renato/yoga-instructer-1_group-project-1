@@ -11,14 +11,34 @@ export default function Contact() {
     message: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange =(e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async  (e) => {
     e.preventDefault();
     console.log("Submitted data:", formData);
     
+    try {
+    const res = await fetch("http://localhost:5001/api/messages/add", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await res.json();
+    console.log("Response from server:", data);
+
+    if (res.ok) {
+      alert("Message sent successfully!");
+      setFormData({ firstName: "", lastName: "", email: "", phone: "", message: "" });
+    } else {
+      alert("Error: " + data.error || "Something went wrong");
+    }
+  } catch (err) {
+    console.error("Error sending message:", err);
+    alert("Could not send message. Please try again later.");
+  }
   };
 
   return (

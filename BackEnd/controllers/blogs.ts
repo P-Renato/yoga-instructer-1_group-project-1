@@ -5,7 +5,7 @@ import { ReadDb, WriteDb } from "./ReadWriteFunction";
 export const getListOfBlogs = (req: Request, res: Response, next: NextFunction) => {
     try {
         const blogsData = JSON.parse(ReadDb());
-        res.json(blogsData.blog); 
+        res.json((blogsData.blog).slice(-5)); 
     } catch (err) {
         next(err);
     }
@@ -15,7 +15,7 @@ export const getOneBlog = (req: Request, res: Response, next: NextFunction) => {
     try {
         const blogsData = JSON.parse(ReadDb());
         const id = parseInt(req.params.blogId);
-        const oneBlog = blogsData.blog.find((o) => o.id === id)
+        const oneBlog = blogsData.blog.find((o: any) => o.id === id)
         res.json(oneBlog); 
     } catch (err) {
         next(err);
@@ -33,7 +33,7 @@ export const addNewBlog = (req: Request, res: Response, next: NextFunction) => {
     const newId = blogsData.blog.length + 1;
     const day = new Date().toLocaleDateString('de-DE');
     const { title, content, category } = req.body;
-    const img = req.file ? "../uploads/"+req.file.filename : ""; // ✅ Get uploaded file name from multer
+    const img = req.file ? req.file.filename : ""; // ✅ Get uploaded file name from multer
 
     const newBlog = {
       id: newId,
@@ -93,7 +93,7 @@ export const updateBlog = (req: Request, res: Response, next: NextFunction) => {
 export const deleteBlog = (req: Request, res: Response, next: NextFunction) => {
     const blogsData = JSON.parse(ReadDb());
     const id = parseInt(req.params.blogId);
-    blogsData.blog = blogsData.blog.filter((b)=> b.id !== id)
+    blogsData.blog = blogsData.blog.filter((b: any)=> b.id !== id)
     WriteDb(blogsData)
     res.status(201).json({message: "This post of blog is deleted successful"})
 }

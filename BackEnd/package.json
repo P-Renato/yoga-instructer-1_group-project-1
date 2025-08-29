@@ -4,7 +4,13 @@
   "type": "module",
   "private": true,
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@types/sharp": "^0.31.1",
+    "nodemon": "^3.1.10"
+  },
+  "scripts": {
+    "start": "bun index.ts",
+    "dev:backend": "nodemon --watch './**/*.ts' --exec 'bun' index.ts"
   },
   "peerDependencies": {
     "typescript": "^5"
@@ -19,6 +25,7 @@
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
-    "multer": "^2.0.2"
+    "multer": "^2.0.2",
+    "sharp": "^0.34.3"
   }
 }

@@ -1,7 +1,9 @@
 import { Router } from "express";
 import { addNewBlog, getListOfBlogs, updateBlog, deleteBlog, getOneBlog } from "../controllers/blogs";
+import  {resizeImage}  from "../middlewares/resizeImage.ts";
 import multer from "multer";
 import fs from "fs"
+
 
 const uploadDir = "./uploads";
 if (!fs.existsSync(uploadDir)) {
@@ -50,9 +52,11 @@ router.post(
       } else if (err) {
         return res.status(400).json({ error: err.message });
       }
+      console.log("📸 File uploaded:", req.file?.filename);
       next();
     });
   },
+  resizeImage,
   addNewBlog
 );
 
@@ -68,6 +72,7 @@ router.patch(
       next();
     });
   },
+  resizeImage,
   updateBlog
 );
 
