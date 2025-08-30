@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { type Request, type Response, type NextFunction } from "express";
 import { getListOfEvents, getOneEvent, addNewEvent, updateEvent, deleteEvent } from "../controllers/events";
 import multer from "multer";
 import fs from "fs"
@@ -43,12 +44,14 @@ router.get("/:eventId", getOneEvent);
 
 router.post(
   "/add",
-  (req, res, next) => {
+   (req: Request, res: Response, next: NextFunction) => {
     upload.single("img")(req, res, (err) => {
       if (err instanceof multer.MulterError) {
-        return res.status(400).json({ error: err.message });
+        res.status(400).json({ error: err.message });
+        return;
       } else if (err) {
-        return res.status(400).json({ error: err.message });
+        res.status(400).json({ error: err.message });
+        return;
       }
       next();
     });
@@ -58,7 +61,7 @@ router.post(
 
 router.patch(
   "/:eventId",
-  (req, res, next) => {
+   (req: Request, res: Response, next: NextFunction) => {
     upload.single("img")(req, res, (err) => {
       if (err instanceof multer.MulterError) {
         return res.status(400).json({ error: err.message });

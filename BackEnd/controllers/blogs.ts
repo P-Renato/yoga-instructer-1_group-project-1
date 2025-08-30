@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import {type Request, type Response, type NextFunction } from "express";
 import { ReadDb, WriteDb } from "./ReadWriteFunction";
 
 
@@ -22,12 +22,13 @@ export const getOneBlog = (req: Request, res: Response, next: NextFunction) => {
     }
 }
 
-export const addNewBlog = (req: Request, res: Response, next: NextFunction) => {
+export const addNewBlog = (req: Request, res: Response, next: NextFunction)=> {
   try {
     const blogsData = JSON.parse(ReadDb());
 
     if (!Array.isArray(blogsData.blog)) {
-      return res.status(500).json({ error: "Database format error. Expected 'blog' to be an array." });
+      res.status(500).json({ error: "Database format error. Expected 'blog' to be an array." });
+      return;
     }
 
     const newId = blogsData.blog.length + 1;
@@ -48,6 +49,7 @@ export const addNewBlog = (req: Request, res: Response, next: NextFunction) => {
     WriteDb(blogsData);
 
     res.status(201).json({ message: "Blog added successfully", blog: newBlog });
+    return;
   } catch (err) {
     next(err);
   }
@@ -62,7 +64,8 @@ export const updateBlog = (req: Request, res: Response, next: NextFunction) => {
 
     const existingBlog = blogsData.blog.find((b: any) => b.id === id);
     if (!existingBlog) {
-      return res.status(404).json({ message: "Blog not found" });
+      res.status(404).json({ message: "Blog not found" });
+      return;
     }
 
     const img = req.file ? req.file.filename : existingBlog.img;

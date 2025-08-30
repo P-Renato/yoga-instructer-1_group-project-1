@@ -1,8 +1,10 @@
 import { Router } from "express";
+import {type Request, type Response, type NextFunction } from "express";
 import { addNewBlog, getListOfBlogs, updateBlog, deleteBlog, getOneBlog } from "../controllers/blogs";
 import  {resizeImage}  from "../middlewares/resizeImage.ts";
 import multer from "multer";
 import fs from "fs"
+import type { RequestHandler } from "express";
 
 
 const uploadDir = "./uploads";
@@ -43,38 +45,25 @@ const router = Router();
 router.get("/all", getListOfBlogs);
 router.get("/:blogId", getOneBlog);
 
-router.post(
-  "/add",
-  (req, res, next) => {
-    upload.single("img")(req, res, (err) => {
-      if (err instanceof multer.MulterError) {
-        return res.status(400).json({ error: err.message });
-      } else if (err) {
-        return res.status(400).json({ error: err.message });
-      }
-      console.log("📸 File uploaded:", req.file?.filename);
-      next();
-    });
-  },
-  resizeImage,
-  addNewBlog
-);
+const uploadMiddleware: RequestHandler = (req, res, next) => {
+  upload.single("img")(req, res, (err) => {
+    if (err instanceof multer.MulterError) {
+      res.status(400).json({ error: err.message });
+      return;
+    } else if (err) {
+      res.status(400).json({ error: err.message });
+      return;
+    }
+    console.log("📸 File uploaded:", req.file?.filename);
+    next();
+  });
+};
 
-router.patch(
-  "/:blogId",
-  (req, res, next) => {
-    upload.single("img")(req, res, (err) => {
-      if (err instanceof multer.MulterError) {
-        return res.status(400).json({ error: err.message });
-      } else if (err) {
-        return res.status(400).json({ error: err.message });
-      }
-      next();
-    });
-  },
-  resizeImage,
-  updateBlog
-);
+
+
+router.post("/add", uploadMiddleware, resizeImage, addNewBlog);
+
+router.patch("/:blogId", uploadMiddleware, resizeImage, updateBlog);
 
 
 router.delete("/:blogId", deleteBlog);

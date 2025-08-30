@@ -50,7 +50,7 @@ export default function Blog () {
                     {group.map((x) => (
                         <nav
                         key={x.id}
-                        className={`container${x.id} container`} 
+                        className={`blogCard container`} 
                         >
                         <nav >
                             <img src={`http://localhost:5001/uploads/${x.img}`} alt="Blog-image" />

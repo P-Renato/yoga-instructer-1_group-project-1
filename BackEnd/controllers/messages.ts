@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { type Request, type Response, type NextFunction } from "express";
 import { ReadDb, WriteDb } from "./ReadWriteFunction";
 
 export const getListOfMes = (req: Request, res: Response, next: NextFunction) => {

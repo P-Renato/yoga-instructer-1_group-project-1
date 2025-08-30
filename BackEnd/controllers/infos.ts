@@ -1,6 +1,11 @@
-import { Request, Response, NextFunction } from "express";
+import { type Request, type Response, type NextFunction } from "express";
 import { ReadDb, WriteDb } from "./ReadWriteFunction";
 
+export type InfoTypes = {
+  id: number;
+  content: string;
+  createDay: string
+}
 
 export const getListOfInfos = (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -15,10 +20,11 @@ export const getOneInfo = (req: Request, res: Response, next: NextFunction) => {
   try {
     const infosData = JSON.parse(ReadDb());
     const id = parseInt(req.params.infoId);
-    const oneInfo = infosData.info.find((o) => o.id === id);
+    const oneInfo = infosData.info.find((o: InfoTypes) => o.id === id);
 
     if (!oneInfo) {
-      return res.status(404).json({ error: "Info not found" });
+      res.status(404).json({ error: "Info not found" });
+      return;
     }
 
     res.status(200).json(oneInfo);
@@ -33,7 +39,8 @@ export const addNewInfo = (req: Request, res: Response, next: NextFunction) => {
     const infosData = JSON.parse(ReadDb());
 
     if (!Array.isArray(infosData.info)) {
-      return res.status(500).json({ error: "Database format error. Expected 'info' to be an array." });
+      res.status(500).json({ error: "Database format error. Expected 'info' to be an array." });
+      return;
     }
 
     const newId = infosData.info.length + 1;
@@ -41,7 +48,8 @@ export const addNewInfo = (req: Request, res: Response, next: NextFunction) => {
     const { content } = req.body;
 
     if (!content) {
-      return res.status(400).json({ error: "Content field is required." });
+      res.status(400).json({ error: "Content field is required." });
+      return;
     }
 
     const newInfo = {
@@ -56,7 +64,8 @@ export const addNewInfo = (req: Request, res: Response, next: NextFunction) => {
     res.status(201).json({ message: "Info added successfully", event: newInfo });
   } catch (err) {
     console.error("Server error in addNewInfo:", err);
-    return res.status(500).json({ error: "Internal server error." });
+    res.status(500).json({ error: "Internal server error." });
+    return;
   }
 };
 
@@ -70,7 +79,8 @@ export const updateInfo = (req: Request, res: Response, next: NextFunction) => {
 
     const existingInfo = infosData.info.find((b: any) => b.id === id);
     if (!existingInfo) {
-      return res.status(404).json({ message: "Information not found" });
+      res.status(404).json({ message: "Information not found" });
+      return;
     }
 
     const updatedInfo = {
@@ -96,7 +106,7 @@ export const updateInfo = (req: Request, res: Response, next: NextFunction) => {
 export const deleteInfo = (req: Request, res: Response, next: NextFunction) => {
     const infosData = JSON.parse(ReadDb());
     const id = parseInt(req.params.infoId);
-    infosData.info = infosData.info.filter((b)=> b.id !== id)
+    infosData.info = infosData.info.filter((b: InfoTypes)=> b.id !== id)
     WriteDb(infosData)
     res.status(201).json({message: "This post of information is deleted successful"})
 }

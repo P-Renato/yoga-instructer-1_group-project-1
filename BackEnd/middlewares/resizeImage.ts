@@ -1,7 +1,7 @@
 import sharp from "sharp";
 import path from "path";
 import fs from "fs";
-import { Request, Response, NextFunction } from "express";
+import { type Request, type Response, type NextFunction } from "express";
 
 export const resizeImage = async (req: Request, res: Response, next: NextFunction) => {
   if (!req.file) {

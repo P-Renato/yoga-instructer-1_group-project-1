@@ -1,6 +1,13 @@
-import { Request, Response, NextFunction } from "express";
+import { type Request, type Response, type NextFunction } from "express";
 import { ReadDb, WriteDb } from "./ReadWriteFunction";
 
+type EventList = {
+  content: string;
+  createdDay: string;
+  id: number;
+  location: string;
+  title: string
+}
 
 export const getListOfEvents = (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -15,7 +22,8 @@ export const getOneEvent = (req: Request, res: Response, next: NextFunction) => 
     try {
         const eventsData = JSON.parse(ReadDb());
         const id = parseInt(req.params.eventId);
-        const oneEvent = eventsData.events.find((o) => o.id === id)
+        console.log(eventsData)
+        const oneEvent = eventsData.events.find((o: EventList) => o.id === id)
         res.json(oneEvent); 
     } catch (err) {
         next(err);
@@ -27,7 +35,8 @@ export const addNewEvent = (req: Request, res: Response, next: NextFunction) => 
    const eventsData = JSON.parse(ReadDb());
 
     if (!Array.isArray(eventsData.events)) {
-      return res.status(500).json({ error: "Database format error. Expected 'blog' to be an array." });
+      res.status(500).json({ error: "Database format error. Expected 'blog' to be an array." });
+      return;
     }
 
     const newId = eventsData.events.length + 1;
@@ -48,6 +57,7 @@ export const addNewEvent = (req: Request, res: Response, next: NextFunction) => 
     WriteDb(eventsData);
 
     res.status(201).json({ message: "Event added successfully", event: newEvent });
+    return;
   } catch (err) {
     next(err);
   }
@@ -62,7 +72,8 @@ export const updateEvent = (req: Request, res: Response, next: NextFunction) => 
 
     const existingEvent = eventsData.events.find((b: any) => b.id === id);
     if (!existingEvent) {
-      return res.status(404).json({ message: "Event not found" });
+      res.status(404).json({ message: "Event not found" });
+      return;
     }
 
     const img = req.file ? req.file.filename : existingEvent.img;
@@ -93,7 +104,8 @@ export const updateEvent = (req: Request, res: Response, next: NextFunction) => 
 export const deleteEvent = (req: Request, res: Response, next: NextFunction) => {
     const eventsData = JSON.parse(ReadDb());
     const id = parseInt(req.params.eventId);
-    eventsData.events = eventsData.events.filter((b)=> b.id !== id)
+    console.log(eventsData)
+    eventsData.events = eventsData.events.filter((b: EventList)=> b.id !== id)
     WriteDb(eventsData)
     res.status(201).json({message: "This post of event is deleted successful"})
 }
