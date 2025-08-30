@@ -1,25 +1,15 @@
 {
   "name": "backend",
-  "module": "index.ts",
+  "version": "1.0.0",
+  "main": "dist/index.js",
   "type": "module",
   "private": true,
-  "devDependencies": {
-    "@types/bun": "latest",
-    "@types/sharp": "^0.31.1",
-    "nodemon": "^3.1.10"
-  },
   "scripts": {
-    "start": "bun index.ts",
-    "dev:backend": "nodemon --watch './**/*.ts' --exec 'bun' index.ts"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js"
   },
   "dependencies": {
-    "@types/cookie-parser": "^1.4.9",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.3",
-    "@types/multer": "^2.0.0",
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
@@ -27,5 +17,14 @@
     "jsonwebtoken": "^9.0.2",
     "multer": "^2.0.2",
     "sharp": "^0.34.3"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.9",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/multer": "^2.0.0",
+    "@types/node": "^22.9.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.3"
   }
 }

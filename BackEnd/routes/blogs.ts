@@ -1,7 +1,7 @@
 import { Router } from "express";
 import {type Request, type Response, type NextFunction } from "express";
 import { addNewBlog, getListOfBlogs, updateBlog, deleteBlog, getOneBlog } from "../controllers/blogs";
-import  {resizeImage}  from "../middlewares/resizeImage.ts";
+import  {resizeImage}  from "../middlewares/resizeImage";
 import multer from "multer";
 import fs from "fs"
 import type { RequestHandler } from "express";
