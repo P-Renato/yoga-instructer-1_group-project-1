@@ -4,6 +4,7 @@ import blogsRouter from "./routes/blogs"
 import eventsRouter from "./routes/events"
 import infosRouter from "./routes/infos"
 import messagesRouter from "./routes/messages"
+import schedulesRouter from "./routes/schedules"
 import path from "path"
 
 const app = express();
@@ -21,6 +22,8 @@ app.use("/api/blogs", blogsRouter )
 app.use("/api/events", eventsRouter)
 
 app.use("/api/infos", infosRouter)
+
+app.use("/api/schedules", schedulesRouter)
 
 app.use("/api/messages", messagesRouter)
 

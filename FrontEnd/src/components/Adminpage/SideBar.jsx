@@ -19,6 +19,7 @@ export default function SideBar() {
       <ul>
         <li><NavLink to="blogList" className={({ isActive }) => (isActive ? "active-link" : "inactive-link")}>Manage Blog Posts</NavLink></li>
         <li><NavLink to="eventList"  className={({ isActive }) => (isActive ? "active-link" : "inactive-link")}>Manage Event Posts</NavLink></li>
+        <li><NavLink to="schedulesList"  className={({ isActive }) => (isActive ? "active-link" : "inactive-link")}>Schedules</NavLink></li>
         <li><NavLink to="moreInfo"  className={({ isActive }) => (isActive ? "active-link" : "inactive-link")}>Additional Info</NavLink></li>
         <li><NavLink to="messageList"  className={({ isActive }) => (isActive ? "active-link" : "inactive-link")}>Customer Messages</NavLink></li>
       </ul>
