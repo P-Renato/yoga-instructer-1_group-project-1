@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: yoga-instructor-backend
+    env: node
+    plan: free
+    build:
+      command: |
+        cd BackEnd
+        npm install
+        npm run build
+    start: cd BackEnd && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: FRONTEND_URL
+        value: https://yoga-instructer-1-group-project-1.onrender.com/
