@@ -112,14 +112,14 @@ try {
   console.log("❌ Infos route failed:", error.message);
 }
 
-// 4. Then add schedules route
-// try {
-//   const schedulesRouter = require("./routes/schedules").default;
-//   app.use("/api/schedules", schedulesRouter);
-//   console.log("✅ Schedules route loaded successfully");
-// } catch (error: any) {
-//   console.log("❌ Schedules route failed:", error.message);
-// }
+
+try {
+  const schedulesRouter = require("./routes/schedules").default;
+  app.use("/api/schedules", schedulesRouter);
+  console.log("✅ Schedules route loaded successfully");
+} catch (error: any) {
+  console.log("❌ Schedules route failed:", error.message);
+}
 
 // 5. Finally add messages route
 // try {
