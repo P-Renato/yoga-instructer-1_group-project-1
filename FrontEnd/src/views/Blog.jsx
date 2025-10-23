@@ -9,6 +9,7 @@ export default function Blog () {
     const {blogs} = useContext(blogContext);
     console.log(blogs)
     
+    console.log("First post image path:", `${API_BASE_URL.replace('/api', '')}/uploads/${firstPost.img}`);
     if (!blogs.length) return <p>Loading blog posts...</p>;
     const firstPost = blogs[0];
     const remainingPosts = blogs.slice(1);
@@ -18,6 +19,12 @@ export default function Blog () {
         groupedPosts.push(remainingPosts.slice(i, i + 2));
     }
 
+    console.log("API_BASE_URL:", API_BASE_URL);
+    console.log("All blog images:", blogs.map(blog => ({
+        id: blog.id,
+        img: blog.img,
+        fullPath: `${API_BASE_URL.replace('/api', '')}/uploads/${blog.img}`
+    })));
     return (
         <>
             <header className="blogHeader" id="blog">
@@ -30,7 +37,7 @@ export default function Blog () {
                 <section className="firstLayout">
                     <div className="container1 container" key={firstPost.id}>
                     <nav className="img-box">
-                        <img src={`${API_BASE_URL.replace('/api', '')}/uploads/${firstPost.img}`} alt="Blog-image" />
+                        <img src={`images/${firstPost.img}`} alt="Blog-image" />
                     </nav>
                     <nav className="innerTexts1">
                         <span className="inline-flex">
@@ -54,7 +61,7 @@ export default function Blog () {
                         className={`blogCard container`} 
                         >
                         <nav >
-                            <img src={`${API_BASE_URL.replace('/api', '')}/uploads/${x.img}`} alt="Blog-image" />
+                            <img src={`images/${x.img}`} alt="Blog-image" />
                         </nav>
                         <nav className="innerTexts">
                             <p>{x.createdDay}</p>
