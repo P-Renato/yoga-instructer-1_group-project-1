@@ -9,10 +9,10 @@ export default function Blog () {
     const {blogs} = useContext(blogContext);
     console.log(blogs)
     
-    console.log("First post image path:", `${API_BASE_URL.replace('/api', '')}/uploads/${firstPost.img}`);
     if (!blogs.length) return <p>Loading blog posts...</p>;
     const firstPost = blogs[0];
     const remainingPosts = blogs.slice(1);
+    console.log("First post image path:", `${API_BASE_URL.replace('/api', '')}/uploads/${firstPost.img}`);
 
     const groupedPosts = [];
     for (let i = 0; i < remainingPosts.length; i += 2) {
