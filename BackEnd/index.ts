@@ -85,9 +85,7 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'Backend server is running!' });
 });
 
-// Add routes ONE AT A TIME and test deployment after each
 
-// 1. First, try blogs route
 try {
   const blogsRouter = require("./routes/blogs").default;
   app.use("/api/blogs", blogsRouter);
@@ -96,14 +94,14 @@ try {
   console.log("❌ Blogs route failed:", error.message);
 }
 
-// 2. If that works, add events route
-// try {
-//   const eventsRouter = require("./routes/events").default;
-//   app.use("/api/events", eventsRouter);
-//   console.log("✅ Events route loaded successfully");
-// } catch (error: any) {
-//   console.log("❌ Events route failed:", error.message);
-// }
+
+try {
+  const eventsRouter = require("./routes/events").default;
+  app.use("/api/events", eventsRouter);
+  console.log("✅ Events route loaded successfully");
+} catch (error: any) {
+  console.log("❌ Events route failed:", error.message);
+}
 
 // 3. Then add infos route
 // try {
