@@ -50,3 +50,14 @@ const port = process.env.PORT || 5001;
 app.listen(port, () => {
   console.log(`Server running on port ${port} in ${process.env.NODE_ENV || 'development'} mode`);
 });
+
+// Keep alive
+const keepAlive = setInterval(() => {
+  console.log('Server still running...');
+}, 30000);
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.log('Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
+console.log('Server setup complete');
