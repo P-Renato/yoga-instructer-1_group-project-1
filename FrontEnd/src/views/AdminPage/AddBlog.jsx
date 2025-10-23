@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import API_BASE_URL from '../../config/api';
 
 export default function AddBlog() {
   const [blog, setBlog] = useState({
@@ -34,7 +35,7 @@ export default function AddBlog() {
     formData.append("img", blog.img); 
   }
 
-  fetch("http://localhost:5001/api/blogs/add", {
+  fetch(`${API_BASE_URL}/blogs/add`, {
     method: "POST",
     body: formData,
   })

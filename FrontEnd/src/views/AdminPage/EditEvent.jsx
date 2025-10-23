@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import {API_BASE_URL} from '../../config/api.js'
 
 export default function EditEvent() {
   const { eventId } = useParams();
@@ -13,7 +14,7 @@ export default function EditEvent() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:5001/api/events/${eventId}`)
+    fetch(`${API_BASE_URL}/events/${eventId}`)
       .then((res) => res.json())
       .then((data) => {
         if (data && data.id === Number(eventId)) {
@@ -46,7 +47,7 @@ export default function EditEvent() {
       formData.append('img', event.img);
     }
 
-    fetch(`http://localhost:5001/api/events/${eventId}`, {
+    fetch(`${API_BASE_URL}/events/${eventId}`, {
       method: 'PATCH',
       body: formData,
     })
@@ -77,7 +78,7 @@ export default function EditEvent() {
       <input type="file" name="img" onChange={handleChange} />
       {event.img && (
         <img
-          src={`http://localhost:5001/uploads/${event.img}`}
+          src={`${API_BASE_URL.replace('/api', '')}/uploads/${event.img}`}
           alt="Current"
           style={{ maxWidth: '150px', marginTop: '10px' }}
         />

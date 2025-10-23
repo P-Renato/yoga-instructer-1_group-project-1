@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {API_BASE_URL} from '../../config/api.js'
+
 
 export default function AddEvent() {
   const [event, setEvent] = useState({
@@ -34,7 +36,7 @@ export default function AddEvent() {
     formData.append("img", event.img); 
   }
 
-  fetch("http://localhost:5001/api/events/add", {
+  fetch(`${API_BASE_URL}/events/add`, {
     method: "POST",
     body: formData,
   })

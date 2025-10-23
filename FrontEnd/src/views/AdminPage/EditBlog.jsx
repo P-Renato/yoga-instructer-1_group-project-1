@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import {API_BASE_URL} from '../../config/api.js'
+
 
 export default function EditBlog() {
   const { blogId } = useParams();
@@ -13,7 +15,7 @@ export default function EditBlog() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:5001/api/blogs/${blogId}`)
+    fetch(`${API_BASE_URL}/blogs/${blogId}`)
       .then((res) => res.json())
       .then((data) => {
         if (data && data.id === Number(blogId)) {
@@ -46,7 +48,7 @@ export default function EditBlog() {
       formData.append('img', blog.img);
     }
 
-    fetch(`http://localhost:5001/api/blogs/${blogId}`, {
+    fetch(`${API_BASE_URL}/blogs/${blogId}`, {
       method: 'PATCH',
       body: formData,
     })
@@ -77,7 +79,7 @@ export default function EditBlog() {
       <input type="file" name="img" onChange={handleChange} />
       {blog.img && (
         <img
-          src={`http://localhost:5001/uploads/${blog.img}`}
+          src={`${API_BASE_URL.replace('/api', '')}/uploads/${blog.img}`}
           alt="Current"
           style={{ maxWidth: '150px', marginTop: '10px' }}
         />
