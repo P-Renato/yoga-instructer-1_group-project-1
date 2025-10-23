@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import API_BASE_URL from '../../config/api';
 
 export default function BlogList() {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5001/api/blogs/all')
+    fetch(`${API_BASE_URL}/blogs/all`)
       .then((res) => res.json())
       .then((data) => {
         setBlogs(data.slice(0, 3));
@@ -14,7 +15,7 @@ export default function BlogList() {
 
   const loadMoreHandler = () => {
     const currentIndex = blogs.length;
-    fetch('http://localhost:5001/api/blogs/all')
+    fetch(`${API_BASE_URL}/blogs/all`)
       .then((res) => res.json())
       .then((data) => {
         if (currentIndex >= data.length) {
@@ -27,7 +28,7 @@ export default function BlogList() {
   };
 
   const deleteBlog = (id) => {
-    fetch(`http://localhost:5001/api/blogs/${id}`, {
+    fetch(`${API_BASE_URL}/blogs/${id}`, {
       method: "DELETE"
     })
       .then((res) => {
@@ -48,7 +49,7 @@ export default function BlogList() {
       <NavLink to={`/admin/addBlog`}><button className='add-btn'>Add new blog</button></NavLink>
       {blogs.map((blog) => (
         <div className='info-container' key={blog.id}>
-          <img src={`http://localhost:5001/uploads/${blog.img}`} alt='blog-image' />
+          <img src={`${API_BASE_URL.replace('/api', '')}/uploads/${blog.img}`} alt='blog-image' />
           <div className='info-title'>
             <b>{blog.title}</b>
             <br />

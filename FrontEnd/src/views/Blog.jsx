@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { blogContext } from "./BlogContext";
 import "../App.css";
 import "./styles/Blog.css";
+import API_BASE_URL from "../config/api";
 
 export default function Blog () {
     const {blogs} = useContext(blogContext);
@@ -29,7 +30,7 @@ export default function Blog () {
                 <section className="firstLayout">
                     <div className="container1 container" key={firstPost.id}>
                     <nav className="img-box">
-                        <img src={`http://localhost:5001/uploads/${firstPost.img}`} alt="Blog-image" />
+                        <img src={`${API_BASE_URL.replace('/api', '')}/uploads/${firstPost.img}`} alt="Blog-image" />
                     </nav>
                     <nav className="innerTexts1">
                         <span className="inline-flex">
@@ -53,7 +54,7 @@ export default function Blog () {
                         className={`blogCard container`} 
                         >
                         <nav >
-                            <img src={`http://localhost:5001/uploads/${x.img}`} alt="Blog-image" />
+                            <img src={`${API_BASE_URL.replace('/api', '')}/uploads/${x.img}`} alt="Blog-image" />
                         </nav>
                         <nav className="innerTexts">
                             <p>{x.createdDay}</p>

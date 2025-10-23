@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import API_BASE_URL from '../config/api.js';
 
 export default function EventList() {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5001/api/events/all')
+    fetch(`${API_BASE_URL}/events/all`)
       .then((res) => res.json())
       .then((data) => {
         setEvents(data.slice(0, 3));
@@ -14,7 +15,7 @@ export default function EventList() {
 
   const loadMoreHandler = () => {
     const currentIndex = events.length;
-    fetch('http://localhost:5001/api/events/all')
+    fetch(`${API_BASE_URL}/events/all`)
       .then((res) => res.json())
       .then((data) => {
         if (currentIndex >= data.length) {
@@ -27,7 +28,7 @@ export default function EventList() {
   };
 
   const deleteEvent = (id) => {
-    fetch(`http://localhost:5001/api/events/${id}`, {
+    fetch(`${API_BASE_URL}/events/${id}`, {
       method: "DELETE"
     })
       .then((res) => {
@@ -48,7 +49,7 @@ export default function EventList() {
       <NavLink to={`/admin/addEvent`}><button className='add-btn'>Add new event</button></NavLink>
       {events.map((event) => (
         <div className='info-container' key={event.id}>
-          <img src={`http://localhost:5001/uploads/${event.img}`} alt='event-image' />
+          <img src={`${API_BASE_URL.replace('/api', '')}/uploads/${event.img}`} alt='event-image' />
           <div className='info-title'>
             <b>{event.title}</b>
             <br />

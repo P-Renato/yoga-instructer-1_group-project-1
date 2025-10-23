@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { blogContext } from './BlogContext'
 import './styles/Event.css'
+import API_BASE_URL from '../config/api'
 
 export default function Event() {
   const {events} = useContext(blogContext)
@@ -15,7 +16,7 @@ export default function Event() {
             <div>
               <section  className='event-posts'>
                 <nav>
-                  <img src={`http://localhost:5001/uploads/${event.img}`} alt="Event-Img" />
+                  <img src={`${API_BASE_URL.replace('/api', '')}/uploads/${event.img}`} alt="Event-Img" />
                 </nav>
                 <nav className='event-text-section'>
                   <p>{event.createdDay}</p>
