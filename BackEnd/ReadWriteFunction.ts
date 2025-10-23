@@ -8,38 +8,25 @@ export const ReadDb = (): string => {
   try {
     console.log('Reading DB from:', dbPath);
     
-    // If file doesn't exist, create it with default data
+    // Check if file exists
     if (!fs.existsSync(dbPath)) {
-      console.log('Creating new DB file...');
-      const defaultData = {
+      console.log('DB file not found at:', dbPath);
+      // Return empty but valid structure
+      return JSON.stringify({
         schedule: [],
         blog: [],
         events: [],
         locations: [],
         info: [],
         messages: []
-      };
-      WriteDb(defaultData);
-      return JSON.stringify(defaultData);
+      });
     }
     
     const content = fs.readFileSync(dbPath, 'utf8').trim();
     console.log('DB file content length:', content.length);
     
-    // If empty or invalid, return default data
-    if (!content || content === '{}') {
-      console.log('DB file is empty, using default data');
-      const defaultData = {
-        schedule: [],
-        blog: [],
-        events: [],
-        locations: [],
-        info: [],
-        messages: []
-      };
-      WriteDb(defaultData);
-      return JSON.stringify(defaultData);
-    }
+    // Validate JSON
+    JSON.parse(content); // This will throw if invalid JSON
     
     return content;
   } catch (error) {
@@ -70,3 +57,4 @@ export const WriteDb = (data: any): void => {
     console.error('Error writing DB:', error);
   }
 };
+

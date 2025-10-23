@@ -95,6 +95,24 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'Backend server is running!' });
 });
 
+// Add this to your BackEnd/index.ts temporarily
+app.get('/api/debug/files', (req, res) => {
+  const fs = require('fs');
+  const path = require('path');
+  
+  const dbPath = path.join(process.cwd(), 'database', 'data.json');
+  const files = {
+    currentDir: process.cwd(),
+    filesInRoot: fs.readdirSync('.'),
+    databaseDirExists: fs.existsSync('database'),
+    databaseFiles: fs.existsSync('database') ? fs.readdirSync('database') : [],
+    dbExists: fs.existsSync(dbPath),
+    dbPath: dbPath
+  };
+  
+  res.json(files);
+});
+
 // Use import instead of require
 app.use("/api/blogs", blogsRouter)
 app.use("/api/events", eventsRouter)
