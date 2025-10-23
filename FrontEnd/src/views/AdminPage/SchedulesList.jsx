@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {API_BASE_URL} from '../../config/api.js'
+
 
 export default function AddInfo() {
   const [info, setInfo] = useState({
@@ -18,7 +20,7 @@ export default function AddInfo() {
   const handleSubmit = (e) => {
   e.preventDefault();
 
-  fetch("http://localhost:5001/api/infos/add", {
+  fetch(`${API_BASE_URL}/infos/add`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
