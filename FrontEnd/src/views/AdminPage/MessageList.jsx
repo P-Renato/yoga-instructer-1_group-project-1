@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import msgListStyle from './styles/message_list.module.css'
-import {API_BASE_URL} from '../../config/api.js'
+import API_BASE_URL from '../../config/api.js'
 
 
 export default function MessageList() {

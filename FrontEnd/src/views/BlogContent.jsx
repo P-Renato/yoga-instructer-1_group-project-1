@@ -5,7 +5,7 @@ import { blogContext } from "./BlogContext";
 import "../App.css";
 import "./styles/BlogContent.css"
 import Footer from "../components/Homepage/Footer";
-import {API_BASE_URL} from '../config/api.js'
+import API_BASE_URL from '../config/api.js'
 
 
 function BlogContent() {
