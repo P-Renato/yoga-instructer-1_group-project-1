@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState,useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import {API_BASE_URL} from '../../config/api.js'
+import API_BASE_URL from '../../config/api.js'
 
 
 export default function MoreInfo() {
