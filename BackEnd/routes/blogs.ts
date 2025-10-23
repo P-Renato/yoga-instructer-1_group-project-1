@@ -63,7 +63,7 @@ const uploadMiddleware: RequestHandler = (req, res, next) => {
 
 router.post("/add", uploadMiddleware, resizeImage, addNewBlog);
 
-router.patch("/:blogId", uploadMiddleware, resizeImage, updateBlog);
+router.put("/:blogId", uploadMiddleware, resizeImage, updateBlog);
 
 
 router.delete("/:blogId", deleteBlog);
