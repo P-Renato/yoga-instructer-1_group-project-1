@@ -8,7 +8,7 @@ router.get("/:infoId", getOneInfo);
 
 router.post("/add", addNewInfo);
 
-router.patch("/:infoId", updateInfo);
+router.put("/:infoId", updateInfo);
 
 router.delete("/:infoId", deleteInfo);
 
