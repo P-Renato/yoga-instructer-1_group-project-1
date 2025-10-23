@@ -1,3 +1,5 @@
+
+/*
 import express from "express"
 import cors from "cors"
 import blogsRouter from "./routes/blogs"
@@ -61,3 +63,25 @@ process.on('unhandledRejection', (reason, promise) => {
 });
 
 console.log('Server setup complete');
+ */
+
+import express from "express"
+import cors from "cors"
+
+const app = express();
+
+// Basic middleware
+app.use(cors())
+app.use(express.json())
+
+// Only health check - no other routes
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'OK', message: 'Basic server is running!' });
+});
+
+const port = process.env.PORT || 5001;
+app.listen(port, () => {
+  console.log(`Basic server running on port ${port}`);
+});
+
+console.log('Basic server setup complete');
