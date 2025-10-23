@@ -67,21 +67,74 @@ console.log('Server setup complete');
 
 import express from "express"
 import cors from "cors"
+import path from "path"
 
 const app = express();
 
-// Basic middleware
-app.use(cors())
+// middleware
+app.use(cors({
+  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  credentials: true
+}))
 app.use(express.json())
+app.use(express.urlencoded({extended: true}));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Only health check - no other routes
+// Health check
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', message: 'Basic server is running!' });
+  res.json({ status: 'OK', message: 'Backend server is running!' });
 });
+
+// Add routes ONE AT A TIME and test deployment after each
+
+// 1. First, try blogs route
+try {
+  const blogsRouter = require("./routes/blogs").default;
+  app.use("/api/blogs", blogsRouter);
+  console.log("✅ Blogs route loaded successfully");
+} catch (error: any) {
+  console.log("❌ Blogs route failed:", error.message);
+}
+
+// 2. If that works, add events route
+// try {
+//   const eventsRouter = require("./routes/events").default;
+//   app.use("/api/events", eventsRouter);
+//   console.log("✅ Events route loaded successfully");
+// } catch (error: any) {
+//   console.log("❌ Events route failed:", error.message);
+// }
+
+// 3. Then add infos route
+// try {
+//   const infosRouter = require("./routes/infos").default;
+//   app.use("/api/infos", infosRouter);
+//   console.log("✅ Infos route loaded successfully");
+// } catch (error: any) {
+//   console.log("❌ Infos route failed:", error.message);
+// }
+
+// 4. Then add schedules route
+// try {
+//   const schedulesRouter = require("./routes/schedules").default;
+//   app.use("/api/schedules", schedulesRouter);
+//   console.log("✅ Schedules route loaded successfully");
+// } catch (error: any) {
+//   console.log("❌ Schedules route failed:", error.message);
+// }
+
+// 5. Finally add messages route
+// try {
+//   const messagesRouter = require("./routes/messages").default;
+//   app.use("/api/messages", messagesRouter);
+//   console.log("✅ Messages route loaded successfully");
+// } catch (error: any) {
+//   console.log("❌ Messages route failed:", error.message);
+// }
 
 const port = process.env.PORT || 5001;
 app.listen(port, () => {
-  console.log(`Basic server running on port ${port}`);
+  console.log(`Server running on port ${port} with routes`);
 });
 
-console.log('Basic server setup complete');
+console.log('Server setup with routes complete');
