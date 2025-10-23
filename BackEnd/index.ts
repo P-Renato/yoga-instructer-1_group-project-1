@@ -103,14 +103,14 @@ try {
   console.log("❌ Events route failed:", error.message);
 }
 
-// 3. Then add infos route
-// try {
-//   const infosRouter = require("./routes/infos").default;
-//   app.use("/api/infos", infosRouter);
-//   console.log("✅ Infos route loaded successfully");
-// } catch (error: any) {
-//   console.log("❌ Infos route failed:", error.message);
-// }
+
+try {
+  const infosRouter = require("./routes/infos").default;
+  app.use("/api/infos", infosRouter);
+  console.log("✅ Infos route loaded successfully");
+} catch (error: any) {
+  console.log("❌ Infos route failed:", error.message);
+}
 
 // 4. Then add schedules route
 // try {
