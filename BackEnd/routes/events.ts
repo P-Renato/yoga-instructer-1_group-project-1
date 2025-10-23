@@ -59,7 +59,7 @@ router.post(
   addNewEvent
 );
 
-router.patch(
+router.put(
   "/:eventId",
    (req: Request, res: Response, next: NextFunction) => {
     upload.single("img")(req, res, (err) => {
