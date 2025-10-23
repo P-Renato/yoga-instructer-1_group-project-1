@@ -1,6 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import { ReadDb, WriteDb } from "./ReadWriteFunction";
 
+interface InfoItem {
+  id: number;
+  content: string;
+  createdDay: string;
+}
 
 export const getListOfInfos = (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -15,7 +20,7 @@ export const getOneInfo = (req: Request, res: Response, next: NextFunction) => {
   try {
     const infosData = JSON.parse(ReadDb());
     const id = parseInt(req.params.infoId);
-    const oneInfo = infosData.info.find((o) => o.id === id);
+    const oneInfo = infosData.info.find((o: InfoItem) => o.id === id);
 
     if (!oneInfo) {
       return res.status(404).json({ error: "Info not found" });
@@ -96,7 +101,7 @@ export const updateInfo = (req: Request, res: Response, next: NextFunction) => {
 export const deleteInfo = (req: Request, res: Response, next: NextFunction) => {
     const infosData = JSON.parse(ReadDb());
     const id = parseInt(req.params.infoId);
-    infosData.info = infosData.info.filter((b)=> b.id !== id)
+    infosData.info = infosData.info.filter((b: InfoItem)=> b.id !== id)
     WriteDb(infosData)
     res.status(201).json({message: "This post of information is deleted successful"})
 }
