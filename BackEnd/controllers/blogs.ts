@@ -4,10 +4,18 @@ import { ReadDb, WriteDb } from "./ReadWriteFunction";
 
 export const getListOfBlogs = (req: Request, res: Response, next: NextFunction) => {
     try {
-        const blogsData = JSON.parse(ReadDb());
-        res.json((blogsData.blog).slice(-5)); 
-    } catch (err) {
-        next(err);
+        console.log('Reading blogs data...');
+        const rawData = ReadDb();
+        console.log('Raw data:', rawData);
+        
+        const blogsData = JSON.parse(rawData);
+        console.log('Parsed data keys:', Object.keys(blogsData));
+        console.log('Blogs array:', blogsData.blog);
+        
+        res.json(blogsData.blog.slice(-5)); 
+    } catch (err: any) {
+        console.error('Error in getListOfBlogs:', err);
+        res.status(500).json({ error: "Failed to fetch blogs: " + err.message });
     }
 };
 
