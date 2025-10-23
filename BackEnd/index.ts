@@ -73,9 +73,15 @@ const app = express();
 
 // middleware
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
-  credentials: true
-}))
+  origin: [
+    'https://yoga-instructer-1-group-project-1.onrender.com/', 
+    'http://localhost:5173',                   
+    'http://localhost:3000'                    
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
+}));
 app.use(express.json())
 app.use(express.urlencoded({extended: true}));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
