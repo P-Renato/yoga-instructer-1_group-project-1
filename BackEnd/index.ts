@@ -121,14 +121,14 @@ try {
   console.log("❌ Schedules route failed:", error.message);
 }
 
-// 5. Finally add messages route
-// try {
-//   const messagesRouter = require("./routes/messages").default;
-//   app.use("/api/messages", messagesRouter);
-//   console.log("✅ Messages route loaded successfully");
-// } catch (error: any) {
-//   console.log("❌ Messages route failed:", error.message);
-// }
+
+try {
+  const messagesRouter = require("./routes/messages").default;
+  app.use("/api/messages", messagesRouter);
+  console.log("✅ Messages route loaded successfully");
+} catch (error: any) {
+  console.log("❌ Messages route failed:", error.message);
+}
 
 const port = process.env.PORT || 5001;
 app.listen(port, () => {
