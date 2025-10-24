@@ -158,6 +158,13 @@ app.get('/api/debug/files', (req, res) => {
   res.json(files);
 });
 
+
+app.use("/api/blogs", blogsRouter)
+app.use("/api/events", eventsRouter)
+app.use("/api/infos", infosRouter)
+app.use("/api/schedules", schedulesRouter)
+app.use("/api/messages", messagesRouter)
+
 // Serve static files from frontend in production
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../../frontend/dist')));
@@ -167,13 +174,6 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
   });
 }
-
-app.use("/api/blogs", blogsRouter)
-app.use("/api/events", eventsRouter)
-app.use("/api/infos", infosRouter)
-app.use("/api/schedules", schedulesRouter)
-app.use("/api/messages", messagesRouter)
-
 const port = process.env.PORT || 5001;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
