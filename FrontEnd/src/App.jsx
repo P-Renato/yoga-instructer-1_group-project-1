@@ -45,6 +45,7 @@ function App() {
           <Route path="messageReply" element={<MessageReply />} />
 
       </Route>
+      <Route path='*' element={<Mainpage />} />
     </Routes>
   );
 }
