@@ -25,11 +25,21 @@ export default function Blog () {
         img: blog.img,
         fullPath: `/images/${blog.img}`
     })));
+
+    const getImageUrl = (imgName) => {
+    // Check if it's a default image (ends with .png and exists in frontend)
+    const defaultImages = ['blog1.png', 'blog2.png', 'blog3.png', 'blog4.png', 'blog5.png'];
+    if (defaultImages.includes(imgName)) {
+        return `/images/${imgName}`;
+    }
+    // Otherwise, it's an uploaded image - use backend URL
+    return `${API_BASE_URL.replace('/api', '')}/uploads/${imgName}`;
+    };
     return (
         <>
             <header className="blogHeader" id="blog">
                 <p>
-                  Yoga life&nbsp;&nbsp;&nbsp;    /   &nbsp;&nbsp;&nbsp;Meditation&nbsp;&nbsp;&nbsp;    /&nbsp;&nbsp;&nbsp;    Psychology&nbsp;&nbsp;&nbsp;     /       &nbsp;&nbsp;&nbsp;Movie
+                  Yoga life&nbsp;&nbsp;    /   &nbsp;&nbsp;Meditation&nbsp;&nbsp;    /&nbsp;&nbsp;    Psychology&nbsp;&nbsp;     /       &nbsp;&nbsp;Movie
                 </p>
                 <h2>Blog</h2>
             </header>
@@ -37,7 +47,9 @@ export default function Blog () {
                 <section className="firstLayout">
                     <div className="container1 container" key={firstPost.id}>
                     <nav className="img-box">
-                        <img src={`/images/${firstPost.img}`} alt="Blog-image" />
+                        <img src={getImageUrl(firstPost.img)} alt="Blog-image" />
+
+                        {/* <img src={`/images/${firstPost.img}`} alt="Blog-image" /> */}
                     </nav>
                     <nav className="innerTexts1">
                         <span className="inline-flex">
@@ -61,7 +73,8 @@ export default function Blog () {
                         className={`blogCard container`} 
                         >
                         <nav >
-                            <img src={`/images/${x.img}`} alt="Blog-image" />
+                            <img src={getImageUrl(x.img)} alt="Blog-image" />
+                            {/* <img src={`/images/${x.img}`} alt="Blog-image" /> */}
                         </nav>
                         <nav className="innerTexts">
                             <p>{x.createdDay}</p>
@@ -79,3 +92,10 @@ export default function Blog () {
         </>
     )
 }
+
+/*
+
+
+
+// Then use it like this:
+*/
