@@ -2,6 +2,7 @@ import sharp from "sharp";
 import path from "path";
 import fs from "fs";
 import { type Request, type Response, type NextFunction } from "express";
+import { uploadToCloudinary } from "../services/cloudinaryService";
 
 export const resizeImage = async (req: Request, res: Response, next: NextFunction) => {
   if (!req.file) {
@@ -23,8 +24,10 @@ export const resizeImage = async (req: Request, res: Response, next: NextFunctio
 
     // replace original file with resized one
     fs.unlinkSync(inputPath);
-    req.file.filename = `resized_${req.file.filename}`;
-    req.file.path = outputPath;
+    const cloudinaryUrl = await uploadToCloudinary(outputPath);
+    req.body.cloudinaryImageUrl = cloudinaryUrl;
+
+    console.log("☁️ Image uploaded to Cloudinary:", cloudinaryUrl);
 
     next();
   } catch (err) {
