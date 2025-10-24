@@ -64,14 +64,6 @@
       "createdDay": "17.01.2025",
       "category": "Event",
       "img": "blog5.png"
-    },
-    {
-      "id": 6,
-      "title": "An amazing Blog!",
-      "content": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam sed voluptate soluta repudiandae qui eos temporibus sequi, odit accusamus sapiente voluptatibus culpa quaerat modi quisquam harum deleniti ipsum incidunt nobis necessitatibus eligendi labore blanditiis illum in! Eveniet nam odio laudantium?",
-      "createdDay": "29.8.2025",
-      "category": "Meditation",
-      "img": "resized_HarryPotterKid_1756500046993.jpeg"
     }
   ],
   "events": [
