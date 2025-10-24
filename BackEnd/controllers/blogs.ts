@@ -42,7 +42,7 @@ export const addNewBlog = (req: Request, res: Response, next: NextFunction)=> {
     const newId = blogsData.blog.length + 1;
     const day = new Date().toLocaleDateString('de-DE');
     const { title, content, category } = req.body;
-    const img = req.file ? req.file.filename : ""; // ✅ Get uploaded file name from multer
+    const img = req.body.cloudinaryImageUrl || "";
 
     const newBlog = {
       id: newId,
@@ -76,7 +76,7 @@ export const updateBlog = (req: Request, res: Response, next: NextFunction) => {
       return;
     }
 
-    const img = req.file ? req.file.filename : existingBlog.img;
+    const img = req.body.cloudinaryImageUrl || existingBlog.img;
 
     const updatedBlog = {
       id,

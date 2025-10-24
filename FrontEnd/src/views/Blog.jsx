@@ -101,7 +101,7 @@ import { useContext } from "react";
 import { blogContext } from "./BlogContext";
 import "../App.css";
 import "./styles/Blog.css";
-import API_BASE_URL from "../config/api";
+
 
 export default function Blog () {
     const {blogs} = useContext(blogContext);
@@ -112,14 +112,12 @@ export default function Blog () {
 
     // Debug: Check what we're actually trying to load
     console.log("=== DEBUG IMAGE INFO ===");
-    console.log("API_BASE_URL:", API_BASE_URL);
-    console.log("Backend uploads URL:", `${API_BASE_URL.replace('/api', '')}/uploads/`);
+
     blogs.forEach(blog => {
-        const backendUrl = `${API_BASE_URL.replace('/api', '')}/uploads/${blog.img}`;
         console.log(`Blog ${blog.id}:`, {
             img: blog.img,
-            backendUrl: backendUrl,
-            isJpeg: blog.img.endsWith('.jpeg') || blog.img.endsWith('.jpg')
+            isCloudinaryUrl: blog.img?.includes('cloudinary'),
+            isFullUrl: blog.img?.startsWith('http')
         });
     });
 
@@ -142,7 +140,7 @@ export default function Blog () {
                     <nav className="img-box">
                         {/* Test with direct URL first */}
                         <img 
-                            src={`${API_BASE_URL.replace('/api', '')}/uploads/${firstPost.img}`} 
+                            src={firstPost.img} 
                             alt="Blog-image" 
                             onError={(e) => {
                                 console.error(`Failed to load image: ${e.target.src}`);
@@ -177,7 +175,7 @@ export default function Blog () {
                         >
                         <nav>
                             <img 
-                                src={`${API_BASE_URL.replace('/api', '')}/uploads/${x.img}`} 
+                                src={x.img} 
                                 alt="Blog-image" 
                                 onError={(e) => {
                                     console.error(`Failed to load image: ${e.target.src}`);
@@ -202,10 +200,3 @@ export default function Blog () {
         </>
     )
 }
-
-/*
-
-
-
-// Then use it like this:
-*/
