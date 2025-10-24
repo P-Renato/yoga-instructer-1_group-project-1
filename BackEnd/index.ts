@@ -95,7 +95,52 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'Backend server is running!' });
 });
 
-// Add this to your BackEnd/index.ts temporarily
+app.get('/api/debug/blogs', (req, res) => {
+    const fs = require('fs');
+    const path = require('path');
+    const dbPath = path.join(__dirname, 'database', 'data.json');
+    
+    if (fs.existsSync(dbPath)) {
+        const data = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
+        res.json({
+            blogs: data.blogs,
+            uploadsDir: fs.readdirSync(path.join(__dirname, 'uploads'))
+        });
+    } else {
+        res.status(500).json({ error: 'Database file not found' });
+    }
+});
+
+app.get('/api/debug/static-files', (req, res) => {
+    const fs = require('fs');
+    const path = require('path');
+    
+    const uploadsPath = path.join(__dirname, 'uploads');
+    const files = {
+        currentDir: __dirname,
+        uploadsPath: uploadsPath,
+        uploadsExists: fs.existsSync(uploadsPath),
+        filesInUploads: fs.existsSync(uploadsPath) ? fs.readdirSync(uploadsPath) : [],
+        specificFileExists: fs.existsSync(path.join(uploadsPath, 'resized_HarryPotterKid_1756500046993.jpeg'))
+    };
+    
+    res.json(files);
+});
+
+app.get('/api/test-image', (req, res) => {
+    res.send(`
+        <html>
+            <body>
+                <h1>Testing static file serving</h1>
+                <p>If you see the image below, static files are working:</p>
+                <img src="/uploads/resized_HarryPotterKid_1756500046993.jpeg" alt="Test" style="max-width: 300px;">
+                <p>Image URL: /uploads/resized_HarryPotterKid_1756500046993.jpeg</p>
+            </body>
+        </html>
+    `);
+});
+
+
 app.get('/api/debug/files', (req, res) => {
   const fs = require('fs');
   const path = require('path');
@@ -113,7 +158,6 @@ app.get('/api/debug/files', (req, res) => {
   res.json(files);
 });
 
-// Use import instead of require
 app.use("/api/blogs", blogsRouter)
 app.use("/api/events", eventsRouter)
 app.use("/api/infos", infosRouter)
