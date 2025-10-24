@@ -110,16 +110,6 @@ export default function Blog () {
     const firstPost = blogs[0];
     const remainingPosts = blogs.slice(1);
 
-    // Debug: Check what we're actually trying to load
-    console.log("=== DEBUG IMAGE INFO ===");
-
-    blogs.forEach(blog => {
-        console.log(`Blog ${blog.id}:`, {
-            img: blog.img,
-            isCloudinaryUrl: blog.img?.includes('cloudinary'),
-            isFullUrl: blog.img?.startsWith('http')
-        });
-    });
 
     const groupedPosts = [];
     for (let i = 0; i < remainingPosts.length; i += 2) {
@@ -140,7 +130,7 @@ export default function Blog () {
                     <nav className="img-box">
                         {/* Test with direct URL first */}
                         <img 
-                            src={firstPost.img} 
+                             src={`/images/${firstPost.img}`}
                             alt="Blog-image" 
                             onError={(e) => {
                                 console.error(`Failed to load image: ${e.target.src}`);
@@ -175,8 +165,7 @@ export default function Blog () {
                         >
                         <nav>
                             <img 
-                                src={x.img} 
-                                alt="Blog-image" 
+                                src={`/images/${x.img}`} alt="Blog-image" 
                                 onError={(e) => {
                                     console.error(`Failed to load image: ${e.target.src}`);
                                     e.target.style.border = '2px solid red';

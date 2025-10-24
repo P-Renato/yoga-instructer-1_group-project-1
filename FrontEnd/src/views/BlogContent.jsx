@@ -25,7 +25,7 @@ function BlogContent() {
         <h2>{foundBlog.title}</h2>
         <p>{foundBlog.createdDay}</p>
         <p>{foundBlog.category}</p>
-        <img src={foundBlog?.img} alt="Image" />
+        <img src={`/images/${foundBlog?.img}`} alt="Image" />
       </main>
       <section className="info-section">
         <h3>Header {foundBlog.id}</h3>
@@ -53,7 +53,7 @@ function BlogContent() {
         
         {remainingBlogs.map(blog =>(
           <nav className="other-blogs" key={blog.id}>
-          <img src={blog.img} alt="blog-image" />
+          <img src={`/images/${blog.img}`} alt="blog-image" />
           <h3>{blog.title}</h3>
           <p>Aenean eleifend ante maecenas pulvinar montes lorem et pede dis dolor pretium donec dictum. Vici consequat justo enim. Venenatis eget adipiscing luctus lorem.</p>
           <NavLink className="read-more" to={`/blog-content/${blog.id}`} key={blog.id}>Read more...</NavLink>
@@ -87,19 +87,19 @@ function BlogContent() {
               </svg>
 
               <nav className="category-blogs">
-              <img src={blog.img} alt="blog-image" />
+              <img src={`/images/${blog.img}`} alt="blog-image" />
               <p>{blog.createdDay}</p>
               <h4>{blog.title}</h4>
               <NavLink className="read-more">Read more...</NavLink>
             </nav>
            <nav className="category-blogs">
-              <img src={blog.img} alt="blog-image" />
+              <img src={`/images/${blog.img}`} alt="blog-image" />
               <p>{blog.createdDay}</p>
               <h4>{blog.title}</h4>
               <NavLink className="read-more">Read more...</NavLink>
             </nav>
             <nav className="category-blogs">
-              <img src={blog.img} alt="blog-image" />
+              <img src={`/images/${blog.img}`} alt="blog-image" />
               <p>{blog.createdDay}</p>
               <h4>{blog.title}</h4>
               <NavLink className="read-more">Read more...</NavLink>
