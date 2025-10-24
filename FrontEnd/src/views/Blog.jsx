@@ -202,3 +202,10 @@ export default function Blog () {
         </>
     )
 }
+
+/*
+
+
+
+// Then use it like this:
+*/
