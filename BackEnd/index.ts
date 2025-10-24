@@ -158,6 +158,16 @@ app.get('/api/debug/files', (req, res) => {
   res.json(files);
 });
 
+// Serve static files from frontend in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../../frontend/dist')));
+  
+  // Catch-all handler
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
+  });
+}
+
 app.use("/api/blogs", blogsRouter)
 app.use("/api/events", eventsRouter)
 app.use("/api/infos", infosRouter)
