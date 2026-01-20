@@ -15,7 +15,7 @@ export default function Event() {
           {events.map(event => (
             <div>
               <section  className='event-posts'>
-                <nav>
+                <nav className='imgNav'>
                   <img src={`images/${event.img}`} alt="Event-Img" />
                 </nav>
                 <nav className='event-text-section'>

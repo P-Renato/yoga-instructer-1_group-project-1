@@ -30,8 +30,8 @@ export default function Home() {
 
             <div style={{
             position: 'fixed',
-            bottom: '20px',
-            right: '20px',
+            top: '1.1em',
+            right: '1.1em',
             zIndex: 1000
             }}>
             <Link 
@@ -39,7 +39,8 @@ export default function Home() {
                 style={{
                 background: '#007bff',
                 color: 'white',
-                padding: '10px 15px',
+                padding: '.6em .8em',
+                opacity: .3,
                 borderRadius: '5px',
                 textDecoration: 'none',
                 fontSize: '14px',
