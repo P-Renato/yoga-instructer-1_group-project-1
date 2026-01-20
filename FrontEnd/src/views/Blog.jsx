@@ -119,9 +119,7 @@ export default function Blog () {
     return (
         <>
             <header className="blogHeader" id="blog">
-                <p>
-                  Yoga life&nbsp;&nbsp;    /   &nbsp;&nbsp;Meditation&nbsp;&nbsp;    /&nbsp;&nbsp;    Psychology&nbsp;&nbsp;     /       &nbsp;&nbsp;Movie
-                </p>
+               
                 <h2>Blog</h2>
             </header>
             <section className="blogSection">

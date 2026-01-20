@@ -22,21 +22,27 @@
 .event-posts{
     display: flex;
     flex-direction: row;
+    align-items: stretch;
 }
 
+.imgNav {
+    width: 68em;
+}
+
+
 .event-posts nav img {
-    width: 38rem;
+    width: 48rem;
     overflow: hidden;
     object-fit: cover;
     height: 32rem;
     margin: 3em;
+    display: block;
 }
 
 .event-text-section {
     font-family: var(--CrimsonPro);
     color: var(--whiteColor);
-    font-size: 1.6em;
-    
+    font-size: 1.8em;
 }
 
 .event-text-section > * {
