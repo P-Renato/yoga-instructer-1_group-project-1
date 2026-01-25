@@ -1,12 +1,14 @@
 import React from 'react'
 import { useState,useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import API_BASE_URL from '../../config/api.js'
+
 
 export default function MoreInfo() {
   const [infos, setInfos] = useState([]);
   
     useEffect(() => {
-      fetch('http://localhost:5001/api/infos/all')
+      fetch(`${API_BASE_URL}/infos/all`)
         .then((res) => res.json())
         .then((data) => {
           setInfos(data.slice(0, 3));
@@ -15,7 +17,7 @@ export default function MoreInfo() {
   
     const loadMoreHandler = () => {
       const currentIndex = infos.length;
-      fetch('http://localhost:5001/api/infos/all')
+      fetch(`${API_BASE_URL}/infos/all`)
         .then((res) => res.json())
         .then((data) => {
           if (currentIndex >= data.length) {
@@ -28,7 +30,7 @@ export default function MoreInfo() {
     };
   
     const deleteInfo = (id) => {
-      fetch(`http://localhost:5001/api/infos/${id}`, {
+      fetch(`${API_BASE_URL}/infos/${id}`, {
         method: "DELETE"
       })
         .then((res) => {

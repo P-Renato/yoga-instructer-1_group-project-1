@@ -1,5 +1,6 @@
 import {useState} from "react";
 import './styles/Contact.css'
+import API_BASE_URL from '../config/api.js';
 
 
 export default function Contact() {
@@ -20,7 +21,7 @@ export default function Contact() {
     console.log("Submitted data:", formData);
     
     try {
-    const res = await fetch("http://localhost:5001/api/messages/add", {
+    const res = await fetch(`${API_BASE_URL}/messages/add`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),

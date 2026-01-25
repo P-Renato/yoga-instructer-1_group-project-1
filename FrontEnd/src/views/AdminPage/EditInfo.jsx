@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import API_BASE_URL from '../../config/api.js'
 
 export default function EditInfo() {
   const { infoId } = useParams(); 
@@ -8,7 +9,7 @@ export default function EditInfo() {
 
   // Fetch existing info
   useEffect(() => {
-    fetch(`http://localhost:5001/api/infos/${infoId}`)
+    fetch(`${API_BASE_URL}/infos/${infoId}`)
       .then((res) => res.json())
       .then((data) => {
         if (data && data.id === Number(infoId)) {
@@ -33,7 +34,7 @@ export default function EditInfo() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`http://localhost:5001/api/infos/${infoId}`, {
+    fetch(`${API_BASE_URL}/infos/${infoId}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(info),

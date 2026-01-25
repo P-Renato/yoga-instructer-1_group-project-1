@@ -1,5 +1,6 @@
 import "../App.css";
 import "./styles/Home.css";
+ import { Link } from "react-router-dom";
 import Header from '../components/Homepage/Header'
 
 export function smoothScroll (e, targetId)  {
@@ -24,6 +25,31 @@ export default function Home() {
 
                 </p>
             </nav>
+           
+
+
+            <div style={{
+            position: 'fixed',
+            top: '1.1em',
+            right: '1.1em',
+            zIndex: 1000
+            }}>
+            <Link 
+                to="/admin" 
+                style={{
+                background: '#007bff',
+                color: 'white',
+                padding: '.6em .8em',
+                opacity: .3,
+                borderRadius: '5px',
+                textDecoration: 'none',
+                fontSize: '14px',
+                boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
+                }}
+            >
+                Login
+            </Link>
+</div>
         </>
     )
 }

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import msgListStyle from './styles/message_list.module.css'
+import API_BASE_URL from '../../config/api.js'
+
 
 export default function MessageList() {
   const [messages, setMessages] = useState([]);
@@ -9,7 +11,7 @@ export default function MessageList() {
   useEffect(()=> {
     const fetchMessages = async () => {
       try {
-        const res = await fetch("http://localhost:5001/api/messages/all");
+        const res = await fetch(`${API_BASE_URL}/messages/all`);
         if (!res.ok) throw new Error("Failed to fetch messages");
         const data = await res.json();
         console.log(data)
