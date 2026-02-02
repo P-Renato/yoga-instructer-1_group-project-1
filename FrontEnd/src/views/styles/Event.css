@@ -22,27 +22,21 @@
 .event-posts{
     display: flex;
     flex-direction: row;
-    align-items: stretch;
 }
-
-.imgNav {
-    width: 68em;
-}
-
 
 .event-posts nav img {
-    width: 48rem;
+    width: 38rem;
     overflow: hidden;
     object-fit: cover;
     height: 32rem;
     margin: 3em;
-    display: block;
 }
 
 .event-text-section {
     font-family: var(--CrimsonPro);
     color: var(--whiteColor);
-    font-size: 1.8em;
+    font-size: 1.6em;
+    
 }
 
 .event-text-section > * {
@@ -52,4 +46,20 @@
 
 .event-text-section p:first-child {
     margin-top: 1.5em;
+}
+
+@media  (max-width: 1024px ){
+    .event-posts{
+        flex-direction: column;
+        align-items: center;
+        gap: 1em;
+    }
+    .event-posts nav img {
+        width: 28rem;   
+        overflow: hidden;
+        object-fit: cover;
+        height: 32rem;
+        margin: auto;
+        margin-top: 5em;
+    }
 }

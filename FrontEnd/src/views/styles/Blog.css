@@ -167,3 +167,9 @@ strong{
 .blogCard nav {
   height: 24.3em;
 }
+
+@media  (max-width: 1024px ) {
+    .blogSection{
+        flex-direction: column;
+    }
+}

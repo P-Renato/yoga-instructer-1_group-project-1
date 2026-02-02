@@ -35,3 +35,12 @@
 .about-me ul li {
     margin-left: 1em;
 }
+
+@media  (max-width: 1024px ){
+    .about-me {
+        padding-left: 4em;
+        text-align: center;
+        align-items: flex-end;
+        padding-bottom: 3em;
+    }
+}

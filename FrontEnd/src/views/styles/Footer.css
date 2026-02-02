@@ -42,3 +42,16 @@
     flex-direction: row;
 }
 
+@media  (max-width: 1024px ){
+    .footer-links{
+        display: flex;
+        flex-direction: column;
+    }
+    .footer-links > a{
+        margin: 0.4em;
+
+    }
+    .footer > section:first-child {
+        margin-left: 2rem;
+    }
+}
