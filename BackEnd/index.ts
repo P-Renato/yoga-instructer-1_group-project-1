@@ -80,9 +80,19 @@ app.use("/api/infos", infosRouter)
 app.use("/api/schedules", schedulesRouter)
 app.use("/api/messages", messagesRouter)
 
-const port = process.env.PORT || 5001;
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+// Health check
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'OK', message: 'Backend server is running!' });
 });
 
-console.log('Server setup complete');
+// Catch-all for SPA (only in production)
+if (process.env.NODE_ENV === 'production') {
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(process.cwd(), '../frontend/dist/index.html'));
+  });
+}
+
+const port = process.env.PORT || 5001;
+app.listen(port, () => {
+  console.log(`Server running on port ${port} in ${process.env.NODE_ENV || 'development'} mode`);
+});
