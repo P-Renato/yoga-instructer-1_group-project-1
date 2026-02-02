@@ -57,13 +57,33 @@ form div input {
     height: 3em;
     border-radius: 15px;
     border: none;
-    float: right;
-    margin-right: 27rem;
     font-size: 1.5em;
     cursor: pointer;
+    display: block;
+    margin: auto;
 }
 
 .contact-send-button:hover {
     text-decoration: underline;
     background-color: #9c9b86;
+}
+
+@media (min-width: 641px) and  (max-width: 1024px ) {
+    #message {
+        width: 200%;
+    }
+
+
+}
+
+@media (max-width: 640px ){
+    #message {
+        width: 260%;
+    }
+    
+    .contact-send-button{
+        align-self: center;
+        align-items: center;
+        margin: 0 auto;
+    }
 }

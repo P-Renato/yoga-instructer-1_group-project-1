@@ -1,7 +1,7 @@
 
 
 .scheduleNav {
-    height: 66rem;
+    min-height: 66rem;
     background-color: var(--whiteColor);
     border: 42px solid var(--colorOne);
     padding: 3rem;
@@ -22,7 +22,7 @@
     left: -3em;
     top: 2em;
     width: 2px;           
-    height: 44em;        
+    height: calc(100% - 4em);        
     background: black; 
     border-radius: 2px;
 }
@@ -104,3 +104,35 @@
 .studio-address-section div:last-child {
     margin-bottom: 3em;
 }
+
+@media  (max-width: 1024px ){
+    .leftSection,
+    .rightSection {
+        position: static;
+    }
+    .scheduleBox {
+        display: flex;
+        position: static;
+        flex-direction: column;
+    }
+    .scheduleNav{
+        min-width: 100%;
+    }
+    .leftSection .schedule-header,
+    .rightSection .schedule-header {
+        margin-left: 2em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .addtional-info-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .addtional-info-section p {
+        margin-top: 2em;
+    }
+}
+

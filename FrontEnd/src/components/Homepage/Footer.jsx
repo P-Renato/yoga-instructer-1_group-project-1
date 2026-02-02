@@ -19,7 +19,7 @@ function Footer() {
     <div className='footer'>
       <section>
         <p>&copy; Carolina Rosa</p>
-        <p>BUILT WITH LOVE  BY Yuki Kaneko • PHOTOS BY Marie Lovegood</p>
+        <p>BUILT WITH LOVE  BY Renato de Bakker • PHOTOS BY Marie Lovegood</p>
       </section>
       <section className='footer-links'>
         <a href="#aboutMe" onClick={(e) => smoothScroll(e, '#aboutMe')}>About me</a>
